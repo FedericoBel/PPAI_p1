@@ -55,7 +55,8 @@ namespace PPAI_CU36.Formularios
             }
         }
 
-        private void registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void btnRegistrarIngresoDeRTEnManteniemientoCorrectivo_Click(object sender, EventArgs e)
         {
             CasoDeUso caso = new CasoDeUso();
             caso.Show();

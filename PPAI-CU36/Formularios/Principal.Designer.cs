@@ -34,7 +34,7 @@
             this.btnClosed = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRegistrarIngresoDeRTEnManteniemientoCorrectivo = new System.Windows.Forms.ToolStripMenuItem();
             this.informToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.titleBar.SuspendLayout();
@@ -108,33 +108,33 @@
             this.informToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 40);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(377, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(257, 28);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.toolStripMenuItem1.BackColor = System.Drawing.Color.DarkTurquoise;
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem});
+            this.btnRegistrarIngresoDeRTEnManteniemientoCorrectivo});
             this.toolStripMenuItem1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem1.ForeColor = System.Drawing.Color.Black;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(133, 24);
             this.toolStripMenuItem1.Text = "Casos de Uso";
             // 
-            // registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem
+            // btnRegistrarIngresoDeRTEnManteniemientoCorrectivo
             // 
-            this.registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem.BackColor = System.Drawing.Color.DodgerBlue;
-            this.registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
-            this.registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem.Name = "registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem";
-            this.registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem.Size = new System.Drawing.Size(516, 24);
-            this.registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem.Text = "Registrar Ingreso de RT en manteniemiento preventivo";
-            this.registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem.Click += new System.EventHandler(this.registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem_Click);
+            this.btnRegistrarIngresoDeRTEnManteniemientoCorrectivo.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.btnRegistrarIngresoDeRTEnManteniemientoCorrectivo.ForeColor = System.Drawing.Color.Black;
+            this.btnRegistrarIngresoDeRTEnManteniemientoCorrectivo.Name = "btnRegistrarIngresoDeRTEnManteniemientoCorrectivo";
+            this.btnRegistrarIngresoDeRTEnManteniemientoCorrectivo.Size = new System.Drawing.Size(512, 24);
+            this.btnRegistrarIngresoDeRTEnManteniemientoCorrectivo.Text = "Registrar Ingreso de RT en manteniemiento correctivo";
+            this.btnRegistrarIngresoDeRTEnManteniemientoCorrectivo.Click += new System.EventHandler(this.btnRegistrarIngresoDeRTEnManteniemientoCorrectivo_Click);
             // 
             // informToolStripMenuItem
             // 
-            this.informToolStripMenuItem.BackColor = System.Drawing.Color.DodgerBlue;
+            this.informToolStripMenuItem.BackColor = System.Drawing.Color.DarkTurquoise;
             this.informToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.informToolStripMenuItem.Name = "informToolStripMenuItem";
             this.informToolStripMenuItem.Size = new System.Drawing.Size(116, 24);
@@ -189,7 +189,7 @@
         private System.Windows.Forms.PictureBox btnMaximize;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem registrarIngresoDeRTEnManteniemientoPreventivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnRegistrarIngresoDeRTEnManteniemientoCorrectivo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem informToolStripMenuItem;
     }

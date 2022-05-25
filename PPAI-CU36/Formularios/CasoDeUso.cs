@@ -52,7 +52,6 @@ namespace PPAI_CU36.Formularios
             }
         }
 
-
         private void titleBar_MouseMove(object sender, MouseEventArgs e)
         {
             if (m == 1)
