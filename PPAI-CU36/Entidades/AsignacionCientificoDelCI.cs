@@ -11,7 +11,7 @@ namespace PPAI_CU36.Entidades
         public int idAsignacionCientificoDelCI { get; set; }
         public DateTime fechaDesde { get; set; }
         public DateTime fechaHasta { get; set; }
-        public int legajo { get; set; }
+        public int idPersonalCientifico { get; set; }
         public int idTurno { get; set; }
     }
 }

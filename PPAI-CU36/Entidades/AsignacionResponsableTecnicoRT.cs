@@ -11,7 +11,7 @@ namespace PPAI_CU36.Entidades
         public int idAsignacionResponsableTecnicoRT { get; set; }
         public DateTime fechaDesde { get; set; }
         public DateTime fechaHasta { get; set; }
-        public int idRecursoTecnologico { get; set; }
-        public int legajoPersonalCientifico { get; set; }
+        public int idRecursosTecnologicos { get; set; }
+        public int idPersonalCientifico { get; set; }
     }
 }

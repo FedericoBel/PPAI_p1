@@ -8,38 +8,10 @@ namespace PPAI_CU36.Entidades
 {
     public class Marca
     {
-        private int idMarca;
-        private string nombre;
-    
-
-        public Marca(int idmarca, string Nombre )
-        {
-            idMarca = idmarca;
-            nombre = Nombre;
-
-        }
-
-        public int idDeMarca
-        {
-            get => idMarca;
-            set => idMarca = value;
-        }
-        public string nombreDeMarca
-        {
-            get => nombre;
-            set => nombre = value;
-        }
-
-
-        
-
-
-
+        public int idMarca { get; set; }
+        public string nombre { get; set; }
 
     }
-
-
-
 
 }
 
