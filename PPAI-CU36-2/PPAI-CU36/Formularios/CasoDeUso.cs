@@ -32,8 +32,6 @@ namespace PPAI_CU36.Formularios
         {
 
             gestorMC.nuevoIngresoMantCorrectivo();
-            //MessageBox.Show(GestorMC.nuevoIngresoMantCorrectivo().nombre);
-            //MessageBox.Show(GestorMC.nuevoIngresoMantCorrectivo(BD.ListaSesion()).nombre);
             rdMail.Checked = true;
 
         }
@@ -51,9 +49,13 @@ namespace PPAI_CU36.Formularios
         private void gdrRecursos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int indice = e.RowIndex;
-            DataGridViewRow filaseleccionada = gdrRecursos.Rows[indice];
-            int numero = int.Parse(filaseleccionada.Cells["numero"].Value.ToString());
-            gestorMC.seleccionRT(numero);
+            if (indice != -1)
+            {
+                DataGridViewRow filaseleccionada = gdrRecursos.Rows[indice];
+                int numero = int.Parse(filaseleccionada.Cells["numero"].Value.ToString());
+                gestorMC.seleccionRT(numero);
+            }
+            
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)

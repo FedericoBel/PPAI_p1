@@ -275,33 +275,37 @@ namespace PPAI_CU36.Datos
             listaCambiosEstadosRT.Add(pasado_cambioEstadoRT);
             listaCambiosEstadosRT.Add(actual_cambioEstadoRT);
 
-            var marca = new Marca
+            var marca1 = new Marca
             {
-                nombre = "Toyota",
+                nombre = "Shidmazu ",
+            };
+            var marca2 = new Marca
+            {
+                nombre = "Nikon",
             };
 
 
             var modelo1 = new Modelo
             {
-                nombre = "modelo1",
-                marca = marca,
+                nombre = "TXB622L",
+                marca = marca1,
             };
             var modelo2 = new Modelo
             {
-                nombre = "modelo2",
-                marca = marca,
+                nombre = "MM-400/800 ",
+                marca = marca2,
             };
 
             var tiporecurso1 = new TipoRecursoTecnologico
             {
-                nombre = "tipo1",
+                nombre = "Balanza de precisión",
                 descripcion = "recurso1fede",
 
             };
             var tiporecurso2 = new TipoRecursoTecnologico
             {
-                nombre = "tipo2",
-                descripcion = "recurso2kevin",
+                nombre = "Microscopio de medición",
+                descripcion = "recurso2erik",
 
             };
 

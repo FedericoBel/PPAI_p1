@@ -43,13 +43,23 @@ namespace PPAI_CU36.Entidades
                     {
                         DataGridViewRow fila = new DataGridViewRow();
 
+                        List<string> nombreYMail = asig[i].mostrarCientifico();
+
                         DataGridViewTextBoxCell celdaCientifico = new DataGridViewTextBoxCell();
-                        celdaCientifico.Value = asig[i].mostrarCientifico();
+                        celdaCientifico.Value = nombreYMail[0];
                         fila.Cells.Add(celdaCientifico);
+
+                        DataGridViewTextBoxCell celdaMail = new DataGridViewTextBoxCell();
+                        celdaMail.Value = nombreYMail[1];
+                        fila.Cells.Add(celdaMail);
+
 
                         DataGridViewTextBoxCell celdaFechaInicio = new DataGridViewTextBoxCell();
                         celdaFechaInicio.Value = this.fechaHoraInicio; // turno 3-- turno 4
                         fila.Cells.Add(celdaFechaInicio);
+
+
+
 
                         listaFilas.Add(fila);
 

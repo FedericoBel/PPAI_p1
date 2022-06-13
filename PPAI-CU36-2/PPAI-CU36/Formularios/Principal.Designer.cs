@@ -109,7 +109,7 @@
             this.informToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 40);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(257, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(377, 28);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 

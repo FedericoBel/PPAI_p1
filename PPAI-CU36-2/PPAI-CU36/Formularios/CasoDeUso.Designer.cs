@@ -39,6 +39,7 @@
             this.modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gdrTurnos = new System.Windows.Forms.DataGridView();
             this.Cientifico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MailCientifico = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtFechaFin = new System.Windows.Forms.MaskedTextBox();
             this.lblFechaFin = new System.Windows.Forms.Label();
@@ -53,6 +54,8 @@
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.btnLimpiarCampos = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.titleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).BeginInit();
@@ -72,7 +75,7 @@
             this.titleBar.Dock = System.Windows.Forms.DockStyle.Top;
             this.titleBar.Location = new System.Drawing.Point(0, 0);
             this.titleBar.Name = "titleBar";
-            this.titleBar.Size = new System.Drawing.Size(928, 36);
+            this.titleBar.Size = new System.Drawing.Size(929, 36);
             this.titleBar.TabIndex = 13;
             this.titleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.titleBar_MouseDown);
             this.titleBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.titleBar_MouseMove);
@@ -83,7 +86,7 @@
             this.btnMaximize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMaximize.Image = global::PPAI_CU36.Properties.Resources._8726465_window_maximize_icon;
-            this.btnMaximize.Location = new System.Drawing.Point(878, 12);
+            this.btnMaximize.Location = new System.Drawing.Point(879, 12);
             this.btnMaximize.Name = "btnMaximize";
             this.btnMaximize.Size = new System.Drawing.Size(16, 16);
             this.btnMaximize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -96,7 +99,7 @@
             this.btnMinimize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMinimize.Image = global::PPAI_CU36.Properties.Resources.Minimize_Icon;
-            this.btnMinimize.Location = new System.Drawing.Point(856, 12);
+            this.btnMinimize.Location = new System.Drawing.Point(857, 12);
             this.btnMinimize.Name = "btnMinimize";
             this.btnMinimize.Size = new System.Drawing.Size(16, 16);
             this.btnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -109,7 +112,7 @@
             this.btnClosed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClosed.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClosed.Image = global::PPAI_CU36.Properties.Resources.Close_Icon;
-            this.btnClosed.Location = new System.Drawing.Point(900, 12);
+            this.btnClosed.Location = new System.Drawing.Point(901, 12);
             this.btnClosed.Name = "btnClosed";
             this.btnClosed.Size = new System.Drawing.Size(16, 16);
             this.btnClosed.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -127,7 +130,7 @@
             this.numero,
             this.marca,
             this.modelo});
-            this.gdrRecursos.Location = new System.Drawing.Point(481, 131);
+            this.gdrRecursos.Location = new System.Drawing.Point(481, 164);
             this.gdrRecursos.Name = "gdrRecursos";
             this.gdrRecursos.ReadOnly = true;
             this.gdrRecursos.Size = new System.Drawing.Size(413, 192);
@@ -166,11 +169,12 @@
             this.gdrTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gdrTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Cientifico,
+            this.MailCientifico,
             this.Fecha});
-            this.gdrTurnos.Location = new System.Drawing.Point(601, 338);
+            this.gdrTurnos.Location = new System.Drawing.Point(481, 408);
             this.gdrTurnos.Name = "gdrTurnos";
             this.gdrTurnos.ReadOnly = true;
-            this.gdrTurnos.Size = new System.Drawing.Size(293, 192);
+            this.gdrTurnos.Size = new System.Drawing.Size(413, 174);
             this.gdrTurnos.TabIndex = 16;
             // 
             // Cientifico
@@ -178,6 +182,14 @@
             this.Cientifico.HeaderText = "Cientifico";
             this.Cientifico.Name = "Cientifico";
             this.Cientifico.ReadOnly = true;
+            this.Cientifico.Width = 70;
+            // 
+            // MailCientifico
+            // 
+            this.MailCientifico.HeaderText = "Mail";
+            this.MailCientifico.Name = "MailCientifico";
+            this.MailCientifico.ReadOnly = true;
+            this.MailCientifico.Width = 150;
             // 
             // Fecha
             // 
@@ -213,9 +225,9 @@
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label2.Location = new System.Drawing.Point(253, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(399, 25);
+            this.label2.Size = new System.Drawing.Size(386, 25);
             this.label2.TabIndex = 19;
-            this.label2.Text = "Ingreso a Manteniemiento Correctivo";
+            this.label2.Text = "Ingreso a Mantenimiento Correctivo";
             // 
             // txtRazon
             // 
@@ -298,7 +310,7 @@
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnConfirmar.Location = new System.Drawing.Point(314, 455);
+            this.btnConfirmar.Location = new System.Drawing.Point(314, 475);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(120, 57);
             this.btnConfirmar.TabIndex = 25;
@@ -310,7 +322,7 @@
             // 
             this.btnLimpiarCampos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiarCampos.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLimpiarCampos.Location = new System.Drawing.Point(107, 455);
+            this.btnLimpiarCampos.Location = new System.Drawing.Point(107, 475);
             this.btnLimpiarCampos.Name = "btnLimpiarCampos";
             this.btnLimpiarCampos.Size = new System.Drawing.Size(118, 57);
             this.btnLimpiarCampos.TabIndex = 26;
@@ -328,12 +340,36 @@
             this.pictureBox1.TabIndex = 27;
             this.pictureBox1.TabStop = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(622, 131);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(273, 18);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Recursos tecnologicos disponibles";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label3.Location = new System.Drawing.Point(833, 381);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 18);
+            this.label3.TabIndex = 29;
+            this.label3.Text = "Turnos";
+            // 
             // CasoDeUso
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
-            this.ClientSize = new System.Drawing.Size(928, 581);
+            this.ClientSize = new System.Drawing.Size(929, 594);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnLimpiarCampos);
             this.Controls.Add(this.btnConfirmar);
@@ -394,7 +430,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn marca;
         private System.Windows.Forms.DataGridViewTextBoxColumn modelo;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cientifico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MailCientifico;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
     }
 }

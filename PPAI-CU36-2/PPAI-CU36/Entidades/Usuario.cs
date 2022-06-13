@@ -53,7 +53,7 @@ namespace PPAI_CU36.Entidades
             set => personalCientifico = value;
         }
 
-        public PersonalCientifico getCientifico(string Usuario, string Contraseña)
+        public PersonalCientifico getCientifico()
         {
 
             return this.personalCientifico;

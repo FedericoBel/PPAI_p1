@@ -12,11 +12,8 @@ namespace PPAI_CU36.Entidades
 {
     public class GestorMC
     {
-        public int numeroRT { get; set; }
         public DateTime fechaFinPrevista { get; set; }
         public string motivo { get; set; }
-        public Sesion Sesion { get; set; }
-
         public RecursosTecnologicos recursoTecnologicoSeleccionado { get; set; }
         public DateTime fechaActual { get; set; }
 
@@ -30,30 +27,27 @@ namespace PPAI_CU36.Entidades
         public List<List<DataGridViewRow>> filaGrillaTurno { get; set; }
 
         //CAMBIAR PARA QUE SEA ATRIBUTO
-        static public List<DataGridViewRow> filagrilla = new List<DataGridViewRow>();
+        static public List<DataGridViewRow> filaGrillaRecurso = new List<DataGridViewRow>();
 
         //public  List<DataGridViewRow> filaGrillaRecursos = new List<DataGridViewRow>();
 
         public AsignacionResponsableTecnicoRT asignacionVigenteLogueada { get; set; }
 
+
+
         public void nuevoIngresoMantCorrectivo()
         {
-            //List<RecursosTecnologicos> listaRecursosTecnologicos = BD.ListaRecursos();
-            //List<PersonalCientifico> listaPersonalCientifico = BD.ListaPersonal();
-            //List<Usuario> listaUsuarios = BD.ListaUsuarios();
-
-            filagrilla.Clear();
+            filaGrillaRecurso.Clear();
             PersonalCientifico pc = getUsuarioLogueado(BD.ListaSesion());
             getRTDisponiblesRRT(pc);
             agruparRTPorTipo();
-
 
         }
 
         private void agruparRTPorTipo()
         {
             
-            Principal.casoForm.solicitarSeleccionRT(filagrilla);
+            Principal.casoForm.solicitarSeleccionRT(filaGrillaRecurso);
         }
 
         public void getRTDisponiblesRRT(PersonalCientifico pc)
@@ -62,23 +56,20 @@ namespace PPAI_CU36.Entidades
             {
                 if (BD.ListaAsignacionesResponsableTecnicoRT()[i].esDeUsuarioLogueadoYVigente(pc))
                 {
-                    this.asignacionVigenteLogueada = BD.ListaAsignacionesResponsableTecnicoRT()[i];
-
-                    recursosTecnologicosDisponibles = asignacionVigenteLogueada.obtenerRecursosDisponibles();
+                    //this.asignacionVigenteLogueada = BD.ListaAsignacionesResponsableTecnicoRT()[i];
+                    //recursosTecnologicosDisponibles = asignacionVigenteLogueada.obtenerRecursosDisponibles();
+                                                       // ASIGNACIONES
+                    recursosTecnologicosDisponibles = (BD.ListaAsignacionesResponsableTecnicoRT()[i]).obtenerRecursosDisponibles();
 
                     break;
                 }
             }
-
-
-
-
-
         }
+
 
         private PersonalCientifico getUsuarioLogueado(Sesion sesion)
         {
-            return sesion.mostrarCientificoLogueado(sesion.Usuario.nombreUsuario, sesion.Usuario.claveDeUsuario);
+            return sesion.mostrarCientificoLogueado();
         }
 
         public void seleccionRT(int numeroRT)
@@ -104,17 +95,18 @@ namespace PPAI_CU36.Entidades
         private void buscarTurnosConfYPendConf()
         {
             getFechaActual();
-        }
-
-        private void getFechaActual()
-        {
-            this.fechaActual = DateTime.Now;
             //variable auxiliar
             List<Turno> turnosCompletos = new List<Turno>();
             turnosCompletos = recursoTecnologicoSeleccionado.turnos;
 
             this.recursoTecnologicoSeleccionado.turnos = this.recursoTecnologicoSeleccionado.getTurnosConfYPendConf();
             getDatosTurnos(turnosCompletos);
+        }
+
+        private void getFechaActual()
+        {
+            this.fechaActual = DateTime.Now;
+        
         }
 
         private void getDatosTurnos(List<Turno> turnosCompletos) 
@@ -158,14 +150,14 @@ namespace PPAI_CU36.Entidades
                 {
                     if (BD.ListaEstados()[i].esIngresoAMC())
                     {
-                        estado1 = i;
+                        estado1 = i; // recurso
                     }
                 }
                 if (BD.ListaEstados()[i].esAmbitoTurno())
                 {
                     if (BD.ListaEstados()[i].esCanceladoPorMC())
                     {
-                        estado2 = i;
+                        estado2 = i; //turnos
 
                     }
                 }

@@ -49,7 +49,7 @@ namespace PPAI_CU36.Entidades
             celdaModelo.Value = marcaYModelo[0];
             fila.Cells.Add(celdaModelo);
 
-            GestorMC.filagrilla.Add(fila);
+            GestorMC.filaGrillaRecurso.Add(fila);
 
         }
 
@@ -69,11 +69,11 @@ namespace PPAI_CU36.Entidades
             return turnosConfYPendConf; 
             
         }
-        // modificar esto, yo tengo el recurso conm turnos 3 y 4 y deberia mostrar la asignacion para los turnos 3 y 4 pero muestro todo....
         public List<List<DataGridViewRow>> getDatosTurnos() 
         {
             List<List<DataGridViewRow>> matriz = new List<List<DataGridViewRow>>();
 
+            // RECORRER TURNOS CANCELABLES
             for (int i = 0; i < this.turnos.Count; i++) // turnos 3 y 4
             {
                 matriz.Add(this.turnos[i].mostrarFechaYHora(BD.ListaAsignacionCien())); // asig 1(turnos 1, 2) y la asig 2 (turnos 3 y 4)

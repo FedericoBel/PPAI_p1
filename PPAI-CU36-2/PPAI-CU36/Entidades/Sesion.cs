@@ -12,10 +12,10 @@ namespace PPAI_CU36.Entidades
         public DateTime fechaHoraInicio { get; set; }
         public DateTime fechaHoraFin { get; set; }
 
-        public PersonalCientifico mostrarCientificoLogueado(string usuario, string clave)
+        public PersonalCientifico mostrarCientificoLogueado()
         {
 
-            return this.Usuario.getCientifico(usuario, clave);
+            return this.Usuario.getCientifico();
         
         }
 

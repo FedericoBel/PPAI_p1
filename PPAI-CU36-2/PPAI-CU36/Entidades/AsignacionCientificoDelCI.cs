@@ -14,11 +14,19 @@ namespace PPAI_CU36.Entidades
         public PersonalCientifico personalCientifico { get; set; }
         public List<Turno> turno { get; set; }
 
-        public string mostrarCientifico()
+        public List<string> mostrarCientifico()
         {
-            return this.personalCientifico.nombre;
+            List<string> nombreYMail = new List<string>();
+            nombreYMail.Add(this.personalCientifico.nombre);
+            nombreYMail.Add(this.personalCientifico.correoElectronicoInstitucional);
+            return nombreYMail;
 
         }
+        //public string mostrarCientifico()
+        //{
+        //    return this.personalCientifico.nombre;
+
+        //}
     }
 
     
