@@ -32,8 +32,14 @@
             this.btnMaximize = new System.Windows.Forms.PictureBox();
             this.btnMinimize = new System.Windows.Forms.PictureBox();
             this.btnClosed = new System.Windows.Forms.PictureBox();
-            this.dgrRecursos = new System.Windows.Forms.DataGridView();
-            this.dgrTurnos = new System.Windows.Forms.DataGridView();
+            this.gdrRecursos = new System.Windows.Forms.DataGridView();
+            this.tipoRecurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gdrTurnos = new System.Windows.Forms.DataGridView();
+            this.Cientifico = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtFechaFin = new System.Windows.Forms.MaskedTextBox();
             this.lblFechaFin = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -42,26 +48,17 @@
             this.btnIngresar = new System.Windows.Forms.Button();
             this.lblNotificacion = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.rdMail = new System.Windows.Forms.RadioButton();
             this.rdWhatsApp = new System.Windows.Forms.RadioButton();
+            this.rdMail = new System.Windows.Forms.RadioButton();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.btnLimpiarCampos = new System.Windows.Forms.Button();
-            this.tipoRecurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.marca = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modelo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstadoRecurso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cientifico = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Hora = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EstadoTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.titleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClosed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgrRecursos)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgrTurnos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdrRecursos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdrTurnos)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -120,36 +117,74 @@
             this.btnClosed.TabStop = false;
             this.btnClosed.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // dgrRecursos
+            // gdrRecursos
             // 
-            this.dgrRecursos.AllowUserToDeleteRows = false;
-            this.dgrRecursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgrRecursos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.gdrRecursos.AllowUserToAddRows = false;
+            this.gdrRecursos.AllowUserToDeleteRows = false;
+            this.gdrRecursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gdrRecursos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.tipoRecurso,
             this.numero,
             this.marca,
-            this.modelo,
-            this.EstadoRecurso});
-            this.dgrRecursos.Location = new System.Drawing.Point(467, 131);
-            this.dgrRecursos.Name = "dgrRecursos";
-            this.dgrRecursos.ReadOnly = true;
-            this.dgrRecursos.Size = new System.Drawing.Size(427, 192);
-            this.dgrRecursos.TabIndex = 15;
+            this.modelo});
+            this.gdrRecursos.Location = new System.Drawing.Point(481, 131);
+            this.gdrRecursos.Name = "gdrRecursos";
+            this.gdrRecursos.ReadOnly = true;
+            this.gdrRecursos.Size = new System.Drawing.Size(413, 192);
+            this.gdrRecursos.TabIndex = 15;
+            this.gdrRecursos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gdrRecursos_CellClick);
             // 
-            // dgrTurnos
+            // tipoRecurso
             // 
-            this.dgrTurnos.AllowUserToDeleteRows = false;
-            this.dgrTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgrTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.tipoRecurso.HeaderText = "Tipo de recurso";
+            this.tipoRecurso.Name = "tipoRecurso";
+            this.tipoRecurso.ReadOnly = true;
+            // 
+            // numero
+            // 
+            this.numero.HeaderText = "NumeroRT";
+            this.numero.Name = "numero";
+            this.numero.ReadOnly = true;
+            this.numero.Width = 70;
+            // 
+            // marca
+            // 
+            this.marca.HeaderText = "Marca";
+            this.marca.Name = "marca";
+            this.marca.ReadOnly = true;
+            // 
+            // modelo
+            // 
+            this.modelo.HeaderText = "Modelo";
+            this.modelo.Name = "modelo";
+            this.modelo.ReadOnly = true;
+            // 
+            // gdrTurnos
+            // 
+            this.gdrTurnos.AllowUserToAddRows = false;
+            this.gdrTurnos.AllowUserToDeleteRows = false;
+            this.gdrTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gdrTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Cientifico,
-            this.Fecha,
-            this.Hora,
-            this.EstadoTurno});
-            this.dgrTurnos.Location = new System.Drawing.Point(467, 338);
-            this.dgrTurnos.Name = "dgrTurnos";
-            this.dgrTurnos.ReadOnly = true;
-            this.dgrTurnos.Size = new System.Drawing.Size(427, 192);
-            this.dgrTurnos.TabIndex = 16;
+            this.Fecha});
+            this.gdrTurnos.Location = new System.Drawing.Point(601, 338);
+            this.gdrTurnos.Name = "gdrTurnos";
+            this.gdrTurnos.ReadOnly = true;
+            this.gdrTurnos.Size = new System.Drawing.Size(293, 192);
+            this.gdrTurnos.TabIndex = 16;
+            // 
+            // Cientifico
+            // 
+            this.Cientifico.HeaderText = "Cientifico";
+            this.Cientifico.Name = "Cientifico";
+            this.Cientifico.ReadOnly = true;
+            // 
+            // Fecha
+            // 
+            this.Fecha.HeaderText = "FechayHoraInicio";
+            this.Fecha.Name = "Fecha";
+            this.Fecha.ReadOnly = true;
+            this.Fecha.Width = 150;
             // 
             // txtFechaFin
             // 
@@ -211,6 +246,7 @@
             this.btnIngresar.TabIndex = 22;
             this.btnIngresar.Text = "Ingresar";
             this.btnIngresar.UseVisualStyleBackColor = true;
+            this.btnIngresar.Click += new System.EventHandler(this.btnIngresar_Click);
             // 
             // lblNotificacion
             // 
@@ -232,19 +268,6 @@
             this.panel1.Size = new System.Drawing.Size(200, 76);
             this.panel1.TabIndex = 24;
             // 
-            // rdMail
-            // 
-            this.rdMail.AutoSize = true;
-            this.rdMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdMail.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.rdMail.Location = new System.Drawing.Point(24, 15);
-            this.rdMail.Name = "rdMail";
-            this.rdMail.Size = new System.Drawing.Size(54, 20);
-            this.rdMail.TabIndex = 0;
-            this.rdMail.TabStop = true;
-            this.rdMail.Text = "Mail";
-            this.rdMail.UseVisualStyleBackColor = true;
-            // 
             // rdWhatsApp
             // 
             this.rdWhatsApp.AutoSize = true;
@@ -258,82 +281,42 @@
             this.rdWhatsApp.Text = "WhatsApp";
             this.rdWhatsApp.UseVisualStyleBackColor = true;
             // 
+            // rdMail
+            // 
+            this.rdMail.AutoSize = true;
+            this.rdMail.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdMail.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.rdMail.Location = new System.Drawing.Point(24, 15);
+            this.rdMail.Name = "rdMail";
+            this.rdMail.Size = new System.Drawing.Size(54, 20);
+            this.rdMail.TabIndex = 0;
+            this.rdMail.TabStop = true;
+            this.rdMail.Text = "Mail";
+            this.rdMail.UseVisualStyleBackColor = true;
+            // 
             // btnConfirmar
             // 
             this.btnConfirmar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConfirmar.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnConfirmar.Location = new System.Drawing.Point(234, 455);
+            this.btnConfirmar.Location = new System.Drawing.Point(314, 455);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(120, 57);
             this.btnConfirmar.TabIndex = 25;
             this.btnConfirmar.Text = "Confirmar Registro";
             this.btnConfirmar.UseVisualStyleBackColor = true;
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // btnLimpiarCampos
             // 
             this.btnLimpiarCampos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpiarCampos.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLimpiarCampos.Location = new System.Drawing.Point(76, 455);
+            this.btnLimpiarCampos.Location = new System.Drawing.Point(107, 455);
             this.btnLimpiarCampos.Name = "btnLimpiarCampos";
             this.btnLimpiarCampos.Size = new System.Drawing.Size(118, 57);
             this.btnLimpiarCampos.TabIndex = 26;
             this.btnLimpiarCampos.Text = "Limpiar Campos";
             this.btnLimpiarCampos.UseVisualStyleBackColor = true;
-            // 
-            // tipoRecurso
-            // 
-            this.tipoRecurso.HeaderText = "Tipo de recurso";
-            this.tipoRecurso.Name = "tipoRecurso";
-            this.tipoRecurso.ReadOnly = true;
-            // 
-            // numero
-            // 
-            this.numero.HeaderText = "Num";
-            this.numero.Name = "numero";
-            this.numero.ReadOnly = true;
-            this.numero.Width = 40;
-            // 
-            // marca
-            // 
-            this.marca.HeaderText = "Marca";
-            this.marca.Name = "marca";
-            this.marca.ReadOnly = true;
-            // 
-            // modelo
-            // 
-            this.modelo.HeaderText = "Modelo";
-            this.modelo.Name = "modelo";
-            this.modelo.ReadOnly = true;
-            // 
-            // EstadoRecurso
-            // 
-            this.EstadoRecurso.HeaderText = "Estado";
-            this.EstadoRecurso.Name = "EstadoRecurso";
-            this.EstadoRecurso.ReadOnly = true;
-            // 
-            // Cientifico
-            // 
-            this.Cientifico.HeaderText = "Cientifico";
-            this.Cientifico.Name = "Cientifico";
-            this.Cientifico.ReadOnly = true;
-            // 
-            // Fecha
-            // 
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
-            // 
-            // Hora
-            // 
-            this.Hora.HeaderText = "Hora";
-            this.Hora.Name = "Hora";
-            this.Hora.ReadOnly = true;
-            // 
-            // EstadoTurno
-            // 
-            this.EstadoTurno.HeaderText = "Estado";
-            this.EstadoTurno.Name = "EstadoTurno";
-            this.EstadoTurno.ReadOnly = true;
+            this.btnLimpiarCampos.Click += new System.EventHandler(this.btnLimpiarCampos_Click);
             // 
             // pictureBox1
             // 
@@ -362,21 +345,22 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblFechaFin);
             this.Controls.Add(this.txtFechaFin);
-            this.Controls.Add(this.dgrTurnos);
-            this.Controls.Add(this.dgrRecursos);
+            this.Controls.Add(this.gdrTurnos);
+            this.Controls.Add(this.gdrRecursos);
             this.Controls.Add(this.titleBar);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CasoDeUso";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CasoDeUso";
+            this.Load += new System.EventHandler(this.CasoDeUso_Load);
             this.titleBar.ResumeLayout(false);
             this.titleBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClosed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgrRecursos)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgrTurnos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdrRecursos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gdrTurnos)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -391,8 +375,8 @@
         private System.Windows.Forms.PictureBox btnMaximize;
         private System.Windows.Forms.PictureBox btnMinimize;
         private System.Windows.Forms.PictureBox btnClosed;
-        private System.Windows.Forms.DataGridView dgrRecursos;
-        private System.Windows.Forms.DataGridView dgrTurnos;
+        private System.Windows.Forms.DataGridView gdrRecursos;
+        private System.Windows.Forms.DataGridView gdrTurnos;
         private System.Windows.Forms.MaskedTextBox txtFechaFin;
         private System.Windows.Forms.Label lblFechaFin;
         private System.Windows.Forms.Label label2;
@@ -405,15 +389,12 @@
         private System.Windows.Forms.RadioButton rdMail;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.Button btnLimpiarCampos;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoRecurso;
         private System.Windows.Forms.DataGridViewTextBoxColumn numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn marca;
         private System.Windows.Forms.DataGridViewTextBoxColumn modelo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstadoRecurso;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cientifico;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Hora;
-        private System.Windows.Forms.DataGridViewTextBoxColumn EstadoTurno;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

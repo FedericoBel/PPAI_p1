@@ -8,8 +8,16 @@ namespace PPAI_CU36.Entidades
 {
     public class Modelo
     {
-        public int idModelo { get; set; }
         public string nombre { get; set; }
-        public int idMarca { get; set; }
+        public Marca marca { get; set; }
+
+        internal List<string> mostrarMarcaYModelo()
+        {
+            List<string> marcaYModelo = new List<string>();
+            marcaYModelo.Add(this.nombre);
+            marcaYModelo.Add(this.marca.mostrarMarca());
+
+            return marcaYModelo;
+        }
     }
 }

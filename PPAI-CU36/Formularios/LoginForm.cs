@@ -1,4 +1,5 @@
-﻿using PPAI_CU36.Entidades;
+﻿using PPAI_CU36.Datos;
+using PPAI_CU36.Entidades;
 using PPAI_CU36.Formularios;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace PPAI_CU36
 {
     public partial class LoginForm : Form
     {
+        public GestorMC GestorMC { get; set; }
+
+        static public Principal ventanaPrincipal;
+
         public LoginForm()
         {
             InitializeComponent();
@@ -21,14 +26,27 @@ namespace PPAI_CU36
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            Usuario usu = new Usuario(1, txtPass.Text, txtUser.Text, true);
+            //var sesion = new Sesion
 
-            string usuCorrecto = "ppai";
-            string claveCorrecta = "123";
-            
-            if(txtUser.Text.Equals(usuCorrecto) && txtPass.Text.Equals(claveCorrecta))
+
+            bool esUsuario = false;
+            List<Usuario> listaUsuarios = BD.ListaUsuarios();
+
+
+            for (int i = 0; i < listaUsuarios.Count; i++)
             {
+                if (txtUser.Text.Equals(listaUsuarios[i].nombreUsuario) && txtPass.Text.Equals(listaUsuarios[i].claveDeUsuario))
+                {
+                    esUsuario = true;
+                }
+            }
+
+            if(esUsuario)
+            {
+                //Principal ventana = new Principal(txtUser.Text, txtPass.Text);
+
                 Principal ventana = new Principal();
+                ventanaPrincipal = ventana;
                 ventana.Show();
                 this.Hide();
             }
@@ -36,12 +54,10 @@ namespace PPAI_CU36
             {
                 MessageBox.Show("ingrese valores correctos");
             }
-
-
         }
 
-
-
+        
+    
 
 
         // Botones de cerrar, minimizar y maximizar...

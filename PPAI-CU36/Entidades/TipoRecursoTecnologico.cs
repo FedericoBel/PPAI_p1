@@ -8,8 +8,13 @@ namespace PPAI_CU36.Entidades
 {
     public class TipoRecursoTecnologico
     {
-        public int idTipoRecursoTecnologico { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }
+        public string mostrarTipoRT()
+        {
+            return this.nombre;
+        }
     }
+
+    
 }

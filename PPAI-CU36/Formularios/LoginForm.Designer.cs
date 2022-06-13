@@ -86,7 +86,7 @@ namespace PPAI_CU36
             this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.Location = new System.Drawing.Point(25, 396);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(350, 45);
+            this.btnLogin.Size = new System.Drawing.Size(350, 41);
             this.btnLogin.TabIndex = 10;
             this.btnLogin.Text = "Ingresar";
             this.btnLogin.UseVisualStyleBackColor = false;

@@ -8,10 +8,58 @@ namespace PPAI_CU36.Entidades
 {
     public class AsignacionResponsableTecnicoRT
     {
-        public int idAsignacionResponsableTecnicoRT { get; set; }
         public DateTime fechaDesde { get; set; }
         public DateTime fechaHasta { get; set; }
-        public int idRecursosTecnologicos { get; set; }
-        public int idPersonalCientifico { get; set; }
+        public List<RecursosTecnologicos> recursosTecnologicos { get; set; }
+        public PersonalCientifico personalCientifico { get; set; }
+
+
+        public bool esDeUsuarioLogueadoYVigente(PersonalCientifico pc)
+        {
+            if (this.personalCientifico.legajo == pc.legajo)
+            {
+                return esVigente();
+
+            }
+
+            return false;
+
+        }
+
+        private bool esVigente()
+        {
+            if (this.fechaHasta == Convert.ToDateTime(null))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public List<RecursosTecnologicos> obtenerRecursosDisponibles()
+        {
+            List<RecursosTecnologicos> recursosTecnologicosDisponibles = new List<RecursosTecnologicos>();
+
+            for (int i = 0; i < this.recursosTecnologicos.Count; i++)
+            {
+                for (int j = 0; j < recursosTecnologicos[i].cambioEstadoRt.Count; j++)
+                {
+                    if (recursosTecnologicos[i].cambioEstadoRt[j].esUltimo())
+                    {
+                        if (recursosTecnologicos[i].cambioEstadoRt[j].Estado.esActivo())
+                        {
+                            recursosTecnologicos[i].mostrarRT();
+                            recursosTecnologicosDisponibles.Add(recursosTecnologicos[i]);
+                        }
+                        
+                    }
+                }
+            }
+
+            return recursosTecnologicosDisponibles;
+        }
+
     }
+
+
+     
 }

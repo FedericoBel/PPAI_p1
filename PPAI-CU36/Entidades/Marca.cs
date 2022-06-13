@@ -8,9 +8,12 @@ namespace PPAI_CU36.Entidades
 {
     public class Marca
     {
-        public int idMarca { get; set; }
         public string nombre { get; set; }
 
+        internal string mostrarMarca()
+        {
+            return this.nombre;
+        }
     }
 
 }

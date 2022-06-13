@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datos\BD.cs" />
     <Compile Include="Datos\DAO\AsignacionCientificoDelCIDAO.cs" />
     <Compile Include="Datos\DAO\AsignacionResponsableTecnicoRTDAO.cs" />
     <Compile Include="Datos\DAO\CambioEstadoRTDAO.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Entidades\CambioEstadoRT.cs" />
     <Compile Include="Entidades\CambioEstadoTurno.cs" />
     <Compile Include="Entidades\Estado.cs" />
+    <Compile Include="Entidades\GestorMC.cs" />
     <Compile Include="Entidades\Mantenimiento.cs" />
     <Compile Include="Entidades\Marca.cs" />
     <Compile Include="Entidades\Modelo.cs" />

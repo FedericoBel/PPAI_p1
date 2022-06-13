@@ -37,6 +37,7 @@
             this.btnRegistrarIngresoDeRTEnManteniemientoCorrectivo = new System.Windows.Forms.ToolStripMenuItem();
             this.informToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.titleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).BeginInit();
@@ -152,6 +153,13 @@
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(1267, 170);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 18;
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,6 +168,7 @@
             this.BackgroundImage = global::PPAI_CU36.Properties.Resources._10623965_919817228097553_8556447570984807974_o;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(912, 568);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.titleBar);
             this.Controls.Add(this.menuStrip1);
@@ -192,5 +201,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnRegistrarIngresoDeRTEnManteniemientoCorrectivo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem informToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

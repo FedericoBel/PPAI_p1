@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PPAI_CU36.Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,14 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace PPAI_CU36.Formularios
 {
     public partial class Principal : Form
     {
+        //public Principal(string nombreUsu, string claveUsu)
+        static public CasoDeUso casoForm;
         public Principal()
         {
             InitializeComponent();
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+
         }
 
 
@@ -57,10 +62,12 @@ namespace PPAI_CU36.Formularios
 
 
         private void btnRegistrarIngresoDeRTEnManteniemientoCorrectivo_Click(object sender, EventArgs e)
-        {
+          {
+            //CasoDeUso caso = new CasoDeUso(txtNombreusu.Text, txtClaveUsu.Text);
+
             CasoDeUso caso = new CasoDeUso();
-            caso.Show();
-            this.Hide();
+            casoForm = caso;
+            caso.ShowDialog();
         }
 
         private void titleBar_MouseMove(object sender, MouseEventArgs e)

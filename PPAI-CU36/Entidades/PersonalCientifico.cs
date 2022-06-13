@@ -15,6 +15,5 @@ namespace PPAI_CU36.Entidades
         public string correoElectronicoInstitucional { get; set; }
         public string correoElectronicoPersonal { get; set; }
         public int telefonoCelular { get; set; }
-        public int idUsuario { get; set; }
     }
 }
