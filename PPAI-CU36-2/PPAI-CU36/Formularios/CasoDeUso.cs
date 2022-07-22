@@ -16,11 +16,17 @@ namespace PPAI_CU36.Formularios
     public partial class CasoDeUso : Form
     {
 
-        static public GestorMC gestorMC = new GestorMC();
+        //static public GestorMC gestorMC = new GestorMC();
 
-        //public CasoDeUso(string nombreUsu, string claveUsu)
+        GestorMC gestorMC = new GestorMC
+        {
 
-        public CasoDeUso()
+            listaEstados = BD.ListaEstados()
+        };
+
+    //public CasoDeUso(string nombreUsu, string claveUsu)
+
+    public CasoDeUso()
         {
             InitializeComponent();
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
@@ -157,7 +163,10 @@ namespace PPAI_CU36.Formularios
             }
         }
 
-      
+        private void titleBar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
 
         private void titleBar_MouseMove(object sender, MouseEventArgs e)
         {

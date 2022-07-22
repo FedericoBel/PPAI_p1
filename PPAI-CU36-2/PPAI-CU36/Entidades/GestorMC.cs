@@ -33,6 +33,8 @@ namespace PPAI_CU36.Entidades
 
         public AsignacionResponsableTecnicoRT asignacionVigenteLogueada { get; set; }
 
+        // 
+        public List<Estado> listaEstados { get; set; }
 
 
         public void nuevoIngresoMantCorrectivo()
@@ -144,18 +146,18 @@ namespace PPAI_CU36.Entidades
             int estado1 = 0;
             int estado2 = 0;
 
-            for (int i = 0; i < BD.ListaEstados().Count; i++)
+            for (int i = 0; i < this.listaEstados.Count; i++)
             {
-                if (BD.ListaEstados()[i].esAmbitoRT())
+                if (this.listaEstados[i].esAmbitoRT())
                 {
-                    if (BD.ListaEstados()[i].esIngresoAMC())
+                    if (this.listaEstados[i].esIngresoAMC())
                     {
                         estado1 = i; // recurso
                     }
                 }
-                if (BD.ListaEstados()[i].esAmbitoTurno())
+                if (this.listaEstados[i].esAmbitoTurno())
                 {
-                    if (BD.ListaEstados()[i].esCanceladoPorMC())
+                    if (this.listaEstados[i].esCanceladoPorMC())
                     {
                         estado2 = i; //turnos
 
