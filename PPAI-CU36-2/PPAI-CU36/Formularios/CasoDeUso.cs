@@ -18,10 +18,18 @@ namespace PPAI_CU36.Formularios
 
         //static public GestorMC gestorMC = new GestorMC();
 
+
+       
+
+
+
         GestorMC gestorMC = new GestorMC
         {
 
-            listaEstados = BD.ListaEstados()
+            listaEstados = BD.ListaEstados(),
+            sesion = BD.ListaSesion(),
+
+
         };
 
     //public CasoDeUso(string nombreUsu, string claveUsu)

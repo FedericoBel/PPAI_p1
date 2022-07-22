@@ -36,11 +36,16 @@ namespace PPAI_CU36.Entidades
         // 
         public List<Estado> listaEstados { get; set; }
 
+        // CAMBIOS
+
+        public Sesion sesion { get; set; }
+
+        //
 
         public void nuevoIngresoMantCorrectivo()
         {
             filaGrillaRecurso.Clear();
-            PersonalCientifico pc = getUsuarioLogueado(BD.ListaSesion());
+            PersonalCientifico pc = getUsuarioLogueado(this.sesion);
             getRTDisponiblesRRT(pc);
             agruparRTPorTipo();
 
@@ -197,3 +202,7 @@ namespace PPAI_CU36.Entidades
         }
     }
 }
+
+
+
+
