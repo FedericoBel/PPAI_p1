@@ -40,43 +40,60 @@ namespace PPAI_CU36.Entidades
 
         public Sesion sesion { get; set; }
 
+        public List<AsignacionResponsableTecnicoRT> listaDeAsignacionResponsableTecnicoRT { get; set; } 
         //
 
         public void nuevoIngresoMantCorrectivo()
         {
             filaGrillaRecurso.Clear();
-            PersonalCientifico pc = getUsuarioLogueado(this.sesion);
-            getRTDisponiblesRRT(pc);
-            agruparRTPorTipo();
+            PersonalCientifico pc = getUsuarioLogueado();
+            
+            AsignacionResponsableTecnicoRT art =  getRTDisponiblesRRT(pc);
 
-        }
+            List<RecursosTecnologicos> recursosTecnologicosDisponibles = art.obtenerRecursosDisponibles();
 
-        private void agruparRTPorTipo()
-        {
+            recursosTecnologicosDisponibles = agruparRTPorTipo(recursosTecnologicosDisponibles);
+            //
             
             Principal.casoForm.solicitarSeleccionRT(filaGrillaRecurso);
+
         }
 
-        public void getRTDisponiblesRRT(PersonalCientifico pc)
+        private List<RecursosTecnologicos> agruparRTPorTipo(List<RecursosTecnologicos> recursosTecnologicosDisponibles)
         {
-            for (int i = 0; i < BD.ListaAsignacionesResponsableTecnicoRT().Count; i++)
+            // FALTA ORDENARLA
+
+            return recursosTecnologicosDisponibles;
+
+
+        }
+
+        public AsignacionResponsableTecnicoRT getRTDisponiblesRRT(PersonalCientifico pc)
+        {
+
+            int indice = 0;
+            for (int i = 0; i < this.listaDeAsignacionResponsableTecnicoRT.Count; i++)
             {
-                if (BD.ListaAsignacionesResponsableTecnicoRT()[i].esDeUsuarioLogueadoYVigente(pc))
+                if (this.listaDeAsignacionResponsableTecnicoRT[i].esDeUsuarioLogueadoYVigente(pc))
                 {
                     //this.asignacionVigenteLogueada = BD.ListaAsignacionesResponsableTecnicoRT()[i];
                     //recursosTecnologicosDisponibles = asignacionVigenteLogueada.obtenerRecursosDisponibles();
-                                                       // ASIGNACIONES
-                    recursosTecnologicosDisponibles = (BD.ListaAsignacionesResponsableTecnicoRT()[i]).obtenerRecursosDisponibles();
+                    // ASIGNACIONES
+                    //recursosTecnologicosDisponibles = (this.listaDeAsignacionResponsableTecnicoRT[i]).obtenerRecursosDisponibles();
+                    indice = i;
 
                     break;
                 }
+
             }
+
+            return this.listaDeAsignacionResponsableTecnicoRT[indice];
         }
 
 
-        private PersonalCientifico getUsuarioLogueado(Sesion sesion)
+        private PersonalCientifico getUsuarioLogueado()
         {
-            return sesion.mostrarCientificoLogueado();
+            return this.sesion.mostrarCientificoLogueado();
         }
 
         public void seleccionRT(int numeroRT)

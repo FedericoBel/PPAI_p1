@@ -70,6 +70,11 @@ namespace PPAI_CU36.Formularios
             caso.ShowDialog();
         }
 
+        private void Principal_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void titleBar_MouseMove(object sender, MouseEventArgs e)
         {
             if (m == 1)

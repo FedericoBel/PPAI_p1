@@ -16,25 +16,24 @@ namespace PPAI_CU36.Formularios
     public partial class CasoDeUso : Form
     {
 
-        //static public GestorMC gestorMC = new GestorMC();
+        //static public GestorMC gestorMC = new GestorMC(); 
 
-
-       
-
-
+        //public CasoDeUso(string nombreUsu, string claveUsu)
 
         GestorMC gestorMC = new GestorMC
         {
 
             listaEstados = BD.ListaEstados(),
+            // CAMBIAR -> Los datos deben venir del Login
             sesion = BD.ListaSesion(),
+
+            listaDeAsignacionResponsableTecnicoRT = BD.ListaAsignacionesResponsableTecnicoRT(),
 
 
         };
 
-    //public CasoDeUso(string nombreUsu, string claveUsu)
 
-    public CasoDeUso()
+        public CasoDeUso()
         {
             InitializeComponent();
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
