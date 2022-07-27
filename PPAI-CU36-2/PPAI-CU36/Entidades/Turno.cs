@@ -17,11 +17,11 @@ namespace PPAI_CU36.Entidades
         public DateTime fechaHoraFin { get; set; }
         public List<CambioEstadoTurno> CambioEstadoTurno { get; set; }
 
-        public bool esCancelable()
+        public bool esCancelable(DateTime fechaFinPrevista)
         {
             for (int i = 0; i < this.CambioEstadoTurno.Count; i++)
             {
-                if (CambioEstadoTurno[i].esActual() && this.fechaHoraFin < CasoDeUso.gestorMC.fechaFinPrevista)
+                if (CambioEstadoTurno[i].esActual() && this.fechaHoraFin < fechaFinPrevista)
                 {
                     if (CambioEstadoTurno[i].esCancelable())
                     {

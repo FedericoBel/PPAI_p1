@@ -39,6 +39,7 @@ namespace PPAI_CU36.Entidades
             celdanumerort.Value = this.numeroRT;
             fila.Cells.Add(celdanumerort);
 
+
             List<string> marcaYModelo = this.Modelo.mostrarMarcaYModelo();
 
             DataGridViewTextBoxCell celdaMarca = new DataGridViewTextBoxCell();
@@ -49,18 +50,19 @@ namespace PPAI_CU36.Entidades
             celdaModelo.Value = marcaYModelo[0];
             fila.Cells.Add(celdaModelo);
 
+
             GestorMC.filaGrillaRecurso.Add(fila);
 
         }
 
 
         
-        public List<Turno> getTurnosConfYPendConf()
+        public List<Turno> getTurnosConfYPendConf(DateTime fechaFinPrevista)
         {
             List<Turno> turnosConfYPendConf = new List<Turno>();
             for (int i = 0; i < this.turnos.Count; i++)
             {
-                if (turnos[i].esCancelable())
+                if (turnos[i].esCancelable(fechaFinPrevista))
                 {
                    turnosConfYPendConf.Add(this.turnos[i]);
                 }
@@ -69,14 +71,14 @@ namespace PPAI_CU36.Entidades
             return turnosConfYPendConf; 
             
         }
-        public List<List<DataGridViewRow>> getDatosTurnos() 
+        public List<List<DataGridViewRow>> getDatosTurnos(List<AsignacionCientificoDelCI> asignacionCientificoDelCIs) 
         {
             List<List<DataGridViewRow>> matriz = new List<List<DataGridViewRow>>();
 
-            // RECORRER TURNOS CANCELABLES
+            // RECORRER TURNOS CANCELABLES...
             for (int i = 0; i < this.turnos.Count; i++) // turnos 3 y 4
             {
-                matriz.Add(this.turnos[i].mostrarFechaYHora(BD.ListaAsignacionCien())); // asig 1(turnos 1, 2) y la asig 2 (turnos 3 y 4)
+                matriz.Add(this.turnos[i].mostrarFechaYHora(asignacionCientificoDelCIs)); // asig 1(turnos 1, 2) y la asig 2 (turnos 3 y 4)
                 
             }
             return matriz;

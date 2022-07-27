@@ -28,23 +28,28 @@ namespace PPAI_CU36.Formularios
             sesion = BD.ListaSesion(),
 
             listaDeAsignacionResponsableTecnicoRT = BD.ListaAsignacionesResponsableTecnicoRT(),
-
+            
+            listaAsignacionCientificos = BD.ListaAsignacionCien(),
 
         };
 
 
         public CasoDeUso()
         {
+            // habilitar pantalla...
             InitializeComponent();
+            // boton para maximizar la pantalla
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
-            
+          
         }
 
 
         private void CasoDeUso_Load(object sender, EventArgs e)
         {
-
+            // nuevo ingreso a mantenimiento correctivo...
             gestorMC.nuevoIngresoMantCorrectivo();
+
+            // habilitar rd de mail...
             rdMail.Checked = true;
 
         }
@@ -65,8 +70,8 @@ namespace PPAI_CU36.Formularios
             if (indice != -1)
             {
                 DataGridViewRow filaseleccionada = gdrRecursos.Rows[indice];
-                int numero = int.Parse(filaseleccionada.Cells["numero"].Value.ToString());
-                gestorMC.seleccionRT(numero);
+                int numeroRT = int.Parse(filaseleccionada.Cells["numero"].Value.ToString());
+                gestorMC.seleccionRT(numeroRT);
             }
             
         }

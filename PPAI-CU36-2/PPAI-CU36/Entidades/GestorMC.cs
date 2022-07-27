@@ -14,7 +14,11 @@ namespace PPAI_CU36.Entidades
     {
         public DateTime fechaFinPrevista { get; set; }
         public string motivo { get; set; }
+
+        // ... cambiamos a indice
         public RecursosTecnologicos recursoTecnologicoSeleccionado { get; set; }
+
+        public int indiceRTS { get; set; }
         public DateTime fechaActual { get; set; }
 
         public List<RecursosTecnologicos> recursosTecnologicosDisponibles { get; set; }
@@ -40,20 +44,33 @@ namespace PPAI_CU36.Entidades
 
         public Sesion sesion { get; set; }
 
-        public List<AsignacionResponsableTecnicoRT> listaDeAsignacionResponsableTecnicoRT { get; set; } 
+        public List<AsignacionResponsableTecnicoRT> listaDeAsignacionResponsableTecnicoRT { get; set; }
         //
+        public List<AsignacionCientificoDelCI> listaAsignacionCientificos { get; set; }
 
         public void nuevoIngresoMantCorrectivo()
         {
             filaGrillaRecurso.Clear();
-            PersonalCientifico pc = getUsuarioLogueado();
+
+
+            //getUsuarioLogueado ... metodo para buscar el personal cientifico logueado
+
+            PersonalCientifico personalCientificoLogueado = getUsuarioLogueado();
             
-            AsignacionResponsableTecnicoRT art =  getRTDisponiblesRRT(pc);
+            // metodo para obtener los recursos tecnologicos disponibles....
 
-            List<RecursosTecnologicos> recursosTecnologicosDisponibles = art.obtenerRecursosDisponibles();
+            AsignacionResponsableTecnicoRT asignacionResponsableTecnicoLogueado =  getRTDisponiblesRRT(personalCientificoLogueado);
 
-            recursosTecnologicosDisponibles = agruparRTPorTipo(recursosTecnologicosDisponibles);
-            //
+            this.asignacionVigenteLogueada = asignacionResponsableTecnicoLogueado;
+
+            // metodo para obtejer los recursos en estado disponible de la asignacionResponsableTecnicoLogueado
+
+            List<RecursosTecnologicos> recursosTecnologicosDisponibles = asignacionResponsableTecnicoLogueado.obtenerRecursosDisponibles();
+            this.recursosTecnologicosDisponibles = recursosTecnologicosDisponibles;
+
+            // ordenar los recursosTecnologicosDisponibles por tipo de recurso...
+            recursosTecnologicosDisponibles = agruparRTPorTipo(this.recursosTecnologicosDisponibles);
+            
             
             Principal.casoForm.solicitarSeleccionRT(filaGrillaRecurso);
 
@@ -103,7 +120,8 @@ namespace PPAI_CU36.Entidades
             {
                 if (recursosTecnologicosDisponibles[i].numeroRT == numeroRT)
                 {
-                    recursoTecnologicoSeleccionado = recursosTecnologicosDisponibles[i];
+                    //recursoTecnologicoSeleccionado = recursosTecnologicosDisponibles[i];
+                    this.indiceRTS = i;
                 }
             }
         }
@@ -119,11 +137,17 @@ namespace PPAI_CU36.Entidades
         private void buscarTurnosConfYPendConf()
         {
             getFechaActual();
-            //variable auxiliar
-            List<Turno> turnosCompletos = new List<Turno>();
-            turnosCompletos = recursoTecnologicoSeleccionado.turnos;
 
-            this.recursoTecnologicoSeleccionado.turnos = this.recursoTecnologicoSeleccionado.getTurnosConfYPendConf();
+            //variable auxiliar, para no perder todos los turnos
+
+            List<Turno> turnosCompletos = new List<Turno>();
+            //turnosCompletos = recursoTecnologicoSeleccionado.turnos;
+            turnosCompletos = recursosTecnologicosDisponibles[indiceRTS].turnos;
+            // metodo para conseguir todos los turnos confirmados y pendiente de confirmacion del recurso tecnoligico seleccionado y los sobreescribo...
+
+            //recurso tecno seleccionado
+            this.recursosTecnologicosDisponibles[indiceRTS].turnos = this.recursosTecnologicosDisponibles[indiceRTS].getTurnosConfYPendConf(this.fechaFinPrevista);
+
             getDatosTurnos(turnosCompletos);
         }
 
@@ -135,8 +159,12 @@ namespace PPAI_CU36.Entidades
 
         private void getDatosTurnos(List<Turno> turnosCompletos) 
         {
-            this.filaGrillaTurno = (this.recursoTecnologicoSeleccionado.getDatosTurnos());
-            this.recursoTecnologicoSeleccionado.turnos = turnosCompletos;
+            this.filaGrillaTurno = (this.recursosTecnologicosDisponibles[indiceRTS].getDatosTurnos(listaAsignacionCientificos));
+            // Cargo todos los turnos para el recurso tecnologico seleccionado... VERIFICAR...
+
+            this.recursosTecnologicosDisponibles[indiceRTS].turnos = turnosCompletos;
+
+
             agruparPorCientifico();
         }
 
@@ -153,20 +181,21 @@ namespace PPAI_CU36.Entidades
             this.notificacion = notificacion;
 
             crearMantenimiento();
-
+            List<int> listaIndicesEstados = buscarEstados();
+            buscarEstadoActual(this.listaEstados[listaIndicesEstados[0]], this.listaEstados[listaIndicesEstados[1]]);
         }
 
         private void crearMantenimiento()
         {
-            recursoTecnologicoSeleccionado.crearMantenimiento(fechaFinPrevista,fechaActual, DateTime.Now, motivo, 1);
+            recursosTecnologicosDisponibles[indiceRTS].crearMantenimiento(fechaFinPrevista,fechaActual, DateTime.Now, motivo, 1);
 
-            buscarEstados();
         }
 
-        private void buscarEstados()
+        private List<int> buscarEstados()
         {
-            int estado1 = 0;
-            int estado2 = 0;
+            int indice1 = 0;
+            int indice2 = 0;
+            List<int> listaIndicesEstados = new List<int>();
 
             for (int i = 0; i < this.listaEstados.Count; i++)
             {
@@ -174,26 +203,29 @@ namespace PPAI_CU36.Entidades
                 {
                     if (this.listaEstados[i].esIngresoAMC())
                     {
-                        estado1 = i; // recurso
+                        indice1 = i; // recurso
                     }
                 }
                 if (this.listaEstados[i].esAmbitoTurno())
                 {
                     if (this.listaEstados[i].esCanceladoPorMC())
                     {
-                        estado2 = i; //turnos
+                        indice2 = i; //turnos
 
                     }
                 }
             }
+            listaIndicesEstados.Add(indice1);
+            listaIndicesEstados.Add(indice2);
 
-            buscarEstadoActual(BD.ListaEstados()[estado1], BD.ListaEstados()[estado2]);
+            return listaIndicesEstados;
+
         }
 
         private void buscarEstadoActual(Estado ingresoMC, Estado canceladoMC)
         {
-            recursoTecnologicoSeleccionado.getEstadoActual(ingresoMC);
-            recursoTecnologicoSeleccionado.cancelarTurnos(canceladoMC);
+            recursosTecnologicosDisponibles[indiceRTS].getEstadoActual(ingresoMC);
+            recursosTecnologicosDisponibles[indiceRTS].cancelarTurnos(canceladoMC);
             generarMail();
         }
 
