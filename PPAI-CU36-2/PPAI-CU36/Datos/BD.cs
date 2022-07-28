@@ -68,7 +68,13 @@ namespace PPAI_CU36.Datos
 
         public static List<List<Turno>> ListaTurnos()
         {
-            List<CambioEstadoTurno> listaCambiosEstadosTurno = new List<CambioEstadoTurno>();
+            List<CambioEstadoTurno> listaCambiosEstadosTurno1 = new List<CambioEstadoTurno>();
+            List<CambioEstadoTurno> listaCambiosEstadosTurno2 = new List<CambioEstadoTurno>();
+            List<CambioEstadoTurno> listaCambiosEstadosTurno3 = new List<CambioEstadoTurno>();
+            List<CambioEstadoTurno> listaCambiosEstadosTurno4 = new List<CambioEstadoTurno>();
+            List<CambioEstadoTurno> listaCambiosEstadosTurno5 = new List<CambioEstadoTurno>();
+            List<CambioEstadoTurno> listaCambiosEstadosTurno6 = new List<CambioEstadoTurno>();
+
             List<Turno> listaTurnosRecursos1 = new List<Turno>();
 
             List<Turno> listaTurnosRecursos2 = new List<Turno>();
@@ -82,23 +88,121 @@ namespace PPAI_CU36.Datos
 
 
 
-            // CAMBIOS DE ESTADO PARA RECURSOS........................
-            var actual_cambioEstadoTurno = new CambioEstadoTurno
+            // CAMBIOS DE ESTADO PARA RECURSO - TURNO N°1........................
+            var actual_cambioEstadoTurno1 = new CambioEstadoTurno
             {
                fechaHoraDesde = Convert.ToDateTime("10/06/2022"),
                fechaHoraHasta = Convert.ToDateTime(null),
                estado = ListaEstados()[2],  //confirmado
 
             };
-            var pasado_cambioEstadoTurno = new CambioEstadoTurno
+            var pasado_cambioEstadoTurno1 = new CambioEstadoTurno
             {
                 fechaHoraDesde = Convert.ToDateTime("07/06/2022"),
                 fechaHoraHasta = Convert.ToDateTime("09/06/2022"),
                 estado = ListaEstados()[3], //estado pend de confirmar
 
             };
-            listaCambiosEstadosTurno.Add(pasado_cambioEstadoTurno);
-            listaCambiosEstadosTurno.Add(actual_cambioEstadoTurno);
+            listaCambiosEstadosTurno1.Add(pasado_cambioEstadoTurno1);
+            listaCambiosEstadosTurno1.Add(actual_cambioEstadoTurno1);
+
+            // CAMBIOS DE ESTADO PARA RECURSO - TURNO N°2........................
+
+            var actual_cambioEstadoTurno2 = new CambioEstadoTurno
+            {
+                fechaHoraDesde = Convert.ToDateTime("10/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime(null),
+                estado = ListaEstados()[2],  //confirmado
+
+            };
+            var pasado_cambioEstadoTurno2 = new CambioEstadoTurno
+            {
+                fechaHoraDesde = Convert.ToDateTime("07/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime("09/06/2022"),
+                estado = ListaEstados()[3], //estado pend de confirmar
+
+            };
+            listaCambiosEstadosTurno2.Add(pasado_cambioEstadoTurno2);
+            listaCambiosEstadosTurno2.Add(actual_cambioEstadoTurno2);
+
+
+            // CAMBIOS DE ESTADO PARA RECURSO - TURNO N°3........................
+            var actual_cambioEstadoTurno3 = new CambioEstadoTurno
+            {
+                fechaHoraDesde = Convert.ToDateTime("10/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime(null),
+                estado = ListaEstados()[2],  //confirmado
+
+            };
+            var pasado_cambioEstadoTurno3 = new CambioEstadoTurno
+            {
+                fechaHoraDesde = Convert.ToDateTime("07/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime("09/06/2022"),
+                estado = ListaEstados()[3], //estado pend de confirmar
+
+            };
+            listaCambiosEstadosTurno3.Add(pasado_cambioEstadoTurno3);
+            listaCambiosEstadosTurno3.Add(actual_cambioEstadoTurno3);
+
+            // CAMBIOS DE ESTADO PARA RECURSO - TURNO N°4........................
+
+            var actual_cambioEstadoTurno4 = new CambioEstadoTurno
+            {
+                fechaHoraDesde = Convert.ToDateTime("10/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime(null),
+                estado = ListaEstados()[2],  //confirmado
+
+            };
+            var pasado_cambioEstadoTurno4 = new CambioEstadoTurno
+            {
+                fechaHoraDesde = Convert.ToDateTime("07/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime("09/06/2022"),
+                estado = ListaEstados()[3], //estado pend de confirmar
+
+            };
+            listaCambiosEstadosTurno4.Add(pasado_cambioEstadoTurno4);
+            listaCambiosEstadosTurno4.Add(actual_cambioEstadoTurno4);
+
+
+            // CAMBIOS DE ESTADO PARA RECURSO - TURNO N°5........................
+
+            var actual_cambioEstadoTurno5 = new CambioEstadoTurno
+            {
+                fechaHoraDesde = Convert.ToDateTime("10/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime(null),
+                estado = ListaEstados()[2],  //confirmado
+
+            };
+            var pasado_cambioEstadoTurno5 = new CambioEstadoTurno
+            {
+                fechaHoraDesde = Convert.ToDateTime("07/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime("09/06/2022"),
+                estado = ListaEstados()[3], //estado pend de confirmar
+
+            };
+            listaCambiosEstadosTurno5.Add(pasado_cambioEstadoTurno5);
+            listaCambiosEstadosTurno5.Add(actual_cambioEstadoTurno5);
+
+
+            // CAMBIOS DE ESTADO PARA RECURSO - TURNO N°6........................
+
+            var actual_cambioEstadoTurno6 = new CambioEstadoTurno
+            {
+                fechaHoraDesde = Convert.ToDateTime("10/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime(null),
+                estado = ListaEstados()[2],  //confirmado
+
+            };
+            var pasado_cambioEstadoTurno6 = new CambioEstadoTurno
+            {
+                fechaHoraDesde = Convert.ToDateTime("07/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime("09/06/2022"),
+                estado = ListaEstados()[3], //estado pend de confirmar
+
+            };
+            listaCambiosEstadosTurno6.Add(pasado_cambioEstadoTurno6);
+            listaCambiosEstadosTurno6.Add(actual_cambioEstadoTurno6);
+
 
             // TURNOS PARA RECURSO 1.............................
             var turno1 = new Turno
@@ -108,7 +212,7 @@ namespace PPAI_CU36.Datos
                 fechaHoraInicio = Convert.ToDateTime("27/06/2022"),
                 fechaHoraFin = Convert.ToDateTime("29/06/2022"),
                 diaSemana = "martes",
-                CambioEstadoTurno = listaCambiosEstadosTurno,
+                CambioEstadoTurno = listaCambiosEstadosTurno1,
 
             };
 
@@ -119,12 +223,13 @@ namespace PPAI_CU36.Datos
                 fechaHoraInicio = Convert.ToDateTime("15/06/2022"),
                 fechaHoraFin = Convert.ToDateTime("18/06/2022"),
                 diaSemana = "miercoles",
-                CambioEstadoTurno = listaCambiosEstadosTurno,
+                CambioEstadoTurno = listaCambiosEstadosTurno2,
 
             };
 
             listaTurnosRecursos1.Add(turno1);
             listaTurnosRecursos1.Add(turno2);
+
 
             // TURNOS PARA RECURSO 2............................19
             var turno3 = new Turno
@@ -134,9 +239,10 @@ namespace PPAI_CU36.Datos
                 fechaHoraInicio = Convert.ToDateTime("17/06/2022"),  //....
                 fechaHoraFin = Convert.ToDateTime("18/06/2022"),
                 diaSemana = "martes",
-                CambioEstadoTurno = listaCambiosEstadosTurno,
+                CambioEstadoTurno = listaCambiosEstadosTurno3,
 
             };
+
 
             var turno4 = new Turno
             {
@@ -145,7 +251,7 @@ namespace PPAI_CU36.Datos
                 fechaHoraInicio = Convert.ToDateTime("19/06/2022"), //...
                 fechaHoraFin = Convert.ToDateTime("25/06/2022"),
                 diaSemana = "miercoles",
-                CambioEstadoTurno = listaCambiosEstadosTurno,
+                CambioEstadoTurno = listaCambiosEstadosTurno4,
 
             };
             listaTurnosRecursos2.Add(turno3);
@@ -159,7 +265,7 @@ namespace PPAI_CU36.Datos
                 fechaHoraInicio = Convert.ToDateTime("23/06/2022"),  //....
                 fechaHoraFin = Convert.ToDateTime("28/06/2022"),
                 diaSemana = "martes",
-                CambioEstadoTurno = listaCambiosEstadosTurno,
+                CambioEstadoTurno = listaCambiosEstadosTurno5,
 
             };
 
@@ -170,7 +276,7 @@ namespace PPAI_CU36.Datos
                 fechaHoraInicio = Convert.ToDateTime("25/06/2022"), //...
                 fechaHoraFin = Convert.ToDateTime("29/06/2022"),
                 diaSemana = "miercoles",
-                CambioEstadoTurno = listaCambiosEstadosTurno,
+                CambioEstadoTurno = listaCambiosEstadosTurno6,
 
             };
             listaTurnosRecursos3.Add(turno5);

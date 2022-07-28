@@ -15,25 +15,6 @@ namespace PPAI_CU36.Formularios
 {
     public partial class CasoDeUso : Form
     {
-
-        //static public GestorMC gestorMC = new GestorMC(); 
-
-        //public CasoDeUso(string nombreUsu, string claveUsu)
-
-        GestorMC gestorMC = new GestorMC
-        {
-
-            listaEstados = BD.ListaEstados(),
-            // CAMBIAR -> Los datos deben venir del Login
-            sesion = BD.ListaSesion(),
-
-            listaDeAsignacionResponsableTecnicoRT = BD.ListaAsignacionesResponsableTecnicoRT(),
-            
-            listaAsignacionCientificos = BD.ListaAsignacionCien(),
-
-        };
-
-
         public CasoDeUso()
         {
             // habilitar pantalla...
@@ -43,6 +24,18 @@ namespace PPAI_CU36.Formularios
           
         }
 
+        // instaciamos el GestorMC
+        // BD: tiene todas las instancias necesarias
+
+        GestorMC gestorMC = new GestorMC
+        {
+            listaEstados = BD.ListaEstados(),
+            // CAMBIAR -> Los datos deben venir del Login
+            sesion = BD.ListaSesion(),
+            listaDeAsignacionResponsableTecnicoRT = BD.ListaAsignacionesResponsableTecnicoRT(),
+            listaAsignacionCientificos = BD.ListaAsignacionCien(),
+
+        };
 
         private void CasoDeUso_Load(object sender, EventArgs e)
         {
@@ -54,6 +47,7 @@ namespace PPAI_CU36.Formularios
 
         }
 
+        // Metodo para cargar la grilla de recursos del CU...
         public void solicitarSeleccionRT(List<DataGridViewRow> fila)
         {
             gdrRecursos.Rows.Clear();
@@ -61,10 +55,12 @@ namespace PPAI_CU36.Formularios
             {
                 gdrRecursos.Rows.Add(fila[i]);
             }
-             
+
+            LimpiarGrilla(); 
 
         }
 
+        // Metodo que toma el recurso tecnologico seleccionado...
         private void gdrRecursos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int indice = e.RowIndex;
@@ -77,33 +73,33 @@ namespace PPAI_CU36.Formularios
             
         }
 
+        // Metodo para ingresar la fecha...
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            //LimpiarGrilla();
             DateTime fechaFinPrevista = Convert.ToDateTime(txtFechaFin.Text);
             String motivo = txtRazon.Text;
             gestorMC.tomarFechaFinYMotivo(fechaFinPrevista, motivo);
         }
 
+        // Metodo que limpia la grilla del CU...
         private void LimpiarGrilla()
         {
             gdrTurnos.Rows.Clear();
             gdrTurnos.Refresh();
         }
 
-        public void solicitarConfirmacionYNotiMC(List<List<DataGridViewRow>> superGrilla)
+        // Metodo para cargar la grilla de turnos...
+        public void solicitarConfirmacionYNotiMC(List<DataGridViewRow> fila)
         {
             LimpiarGrilla();
-            for (int i = 0; i < superGrilla.Count; i++)
+            for (int i = 0; i < fila.Count; i++)
             {
-                for(int j = 0; j < superGrilla[i].Count; j++)
-                {
-                    gdrTurnos.Rows.Add(superGrilla[i][j]);
-                }
+                gdrTurnos.Rows.Add(fila[i]);
             }
+
         }
 
-
+        // Metodo para confirmar el ingreso a mantenimiento correctivo del recurso seleccionado...
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
             MessageBoxButtons botones = MessageBoxButtons.YesNo;
@@ -111,25 +107,19 @@ namespace PPAI_CU36.Formularios
 
             if (QuestionResult == DialogResult.Yes)
             {
-                //mail false, whatsapp true
                 bool confirmacion = true;
-
                 bool notificacion = false;
 
                 if (rdWhatsApp.Checked)
                 {
                     notificacion = true;
                 }
-
-                gestorMC.tomarConfirmacionYNoti(confirmacion, notificacion);
-                
+                gestorMC.tomarConfirmacionYNoti(confirmacion, notificacion);      
             }
-            else
-            {
-                this.Close();
-            }
+          
         }
 
+        // Metodo para limpiar los campos de la pantalla del CU...
         private void btnLimpiarCampos_Click(object sender, EventArgs e)
         {
             txtFechaFin.Text = "";
@@ -140,8 +130,7 @@ namespace PPAI_CU36.Formularios
 
 
 
-        // BOTONES VENTANA
-
+        // BOTONES VENTANA...
         private void btnMinimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
