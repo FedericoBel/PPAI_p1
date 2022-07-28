@@ -1,6 +1,7 @@
 ﻿using PPAI_CU36.Datos;
 using PPAI_CU36.Formularios;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -14,38 +15,26 @@ namespace PPAI_CU36.Entidades
     {
         public DateTime fechaFinPrevista { get; set; }
         public string motivo { get; set; }
-
         // ... cambiamos a indice
-        public RecursosTecnologicos recursoTecnologicoSeleccionado { get; set; }
-
         public int indiceRTS { get; set; }
         public DateTime fechaActual { get; set; }
-
-        public List<RecursosTecnologicos> recursosTecnologicosDisponibles { get; set; }
-        
+        public List<RecursosTecnologicos> recursosTecnologicosDisponibles { get; set; } 
         public bool confirmacion { get; set; }
 
         public bool notificacion { get; set; }
- 
          
         public List<List<DataGridViewRow>> filaGrillaTurno { get; set; }
 
         //CAMBIAR PARA QUE SEA ATRIBUTO
         static public List<DataGridViewRow> filaGrillaRecurso = new List<DataGridViewRow>();
 
-        //public  List<DataGridViewRow> filaGrillaRecursos = new List<DataGridViewRow>();
-
         public AsignacionResponsableTecnicoRT asignacionVigenteLogueada { get; set; }
 
-        // 
         public List<Estado> listaEstados { get; set; }
 
         // CAMBIOS
-
         public Sesion sesion { get; set; }
-
         public List<AsignacionResponsableTecnicoRT> listaDeAsignacionResponsableTecnicoRT { get; set; }
-        //
         public List<AsignacionCientificoDelCI> listaAsignacionCientificos { get; set; }
 
         public void nuevoIngresoMantCorrectivo()
@@ -63,26 +52,24 @@ namespace PPAI_CU36.Entidades
 
             this.asignacionVigenteLogueada = asignacionResponsableTecnicoLogueado;
 
-            // metodo para obtejer los recursos en estado disponible de la asignacionResponsableTecnicoLogueado
+            // metodo para obtener los recursos en estado disponible de la asignacionResponsableTecnicoLogueado
 
-            List<RecursosTecnologicos> recursosTecnologicosDisponibles = asignacionResponsableTecnicoLogueado.obtenerRecursosDisponibles();
+            List<RecursosTecnologicos> recursosTecnologicosDisponibles = this.asignacionVigenteLogueada.obtenerRecursosDisponibles();
+            
             this.recursosTecnologicosDisponibles = recursosTecnologicosDisponibles;
 
             // ordenar los recursosTecnologicosDisponibles por tipo de recurso...
-            recursosTecnologicosDisponibles = agruparRTPorTipo(this.recursosTecnologicosDisponibles);
-            
+            //recursosTecnologicosDisponibles = agruparRTPorTipo(this.recursosTecnologicosDisponibles);
+
+            agruparRTPorTipo();
             
             Principal.casoForm.solicitarSeleccionRT(filaGrillaRecurso);
 
         }
 
-        private List<RecursosTecnologicos> agruparRTPorTipo(List<RecursosTecnologicos> recursosTecnologicosDisponibles)
+        private void agruparRTPorTipo()
         {
-            // FALTA ORDENARLA
-
-            return recursosTecnologicosDisponibles;
-
-
+            filaGrillaRecurso = filaGrillaRecurso.OrderBy(x => x.Cells[0].Value.ToString()).ToList();
         }
 
         public AsignacionResponsableTecnicoRT getRTDisponiblesRRT(PersonalCientifico pc)
@@ -93,12 +80,7 @@ namespace PPAI_CU36.Entidades
             {
                 if (this.listaDeAsignacionResponsableTecnicoRT[i].esDeUsuarioLogueadoYVigente(pc))
                 {
-                    //this.asignacionVigenteLogueada = BD.ListaAsignacionesResponsableTecnicoRT()[i];
-                    //recursosTecnologicosDisponibles = asignacionVigenteLogueada.obtenerRecursosDisponibles();
-                    // ASIGNACIONES
-                    //recursosTecnologicosDisponibles = (this.listaDeAsignacionResponsableTecnicoRT[i]).obtenerRecursosDisponibles();
                     indice = i;
-
                     break;
                 }
 
@@ -225,7 +207,8 @@ namespace PPAI_CU36.Entidades
         private void buscarEstadoActual(Estado ingresoMC, Estado canceladoMC)
         {
             recursosTecnologicosDisponibles[indiceRTS].getEstadoActual(ingresoMC);
-            recursosTecnologicosDisponibles[indiceRTS].cancelarTurnos(canceladoMC);
+            recursosTecnologicosDisponibles[indiceRTS].cancelarTurnos(canceladoMC, this.fechaFinPrevista);
+
             generarMail();
         }
 
@@ -234,6 +217,27 @@ namespace PPAI_CU36.Entidades
             if (!this.notificacion)
             {
                 MessageBox.Show("Mail enviado con exito!!", "Mail", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                filaGrillaRecurso.Clear();
+
+                for (int i = 0; i < this.recursosTecnologicosDisponibles.Count; i++)
+                {
+                    for (int j = 0; j < this.recursosTecnologicosDisponibles[i].cambioEstadoRt.Count; j++)
+                    {
+                        if (this.recursosTecnologicosDisponibles[i].cambioEstadoRt[j].esUltimo())
+                        {
+                            if (this.recursosTecnologicosDisponibles[i].cambioEstadoRt[j].Estado.esActivo())
+                            {
+                                this.recursosTecnologicosDisponibles[i].mostrarRT();
+                   
+                            }
+                        }
+                    }
+                }
+
+
+                Principal.casoForm.solicitarSeleccionRT(filaGrillaRecurso);
 
             }
             else
@@ -246,7 +250,7 @@ namespace PPAI_CU36.Entidades
 
         private void finCU()
         {
-            Principal.casoForm.Close();
+            MessageBox.Show("Mail enviado con exito!!", "Mail", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
     }

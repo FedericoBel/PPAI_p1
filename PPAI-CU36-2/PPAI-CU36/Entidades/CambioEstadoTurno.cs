@@ -23,7 +23,7 @@ namespace PPAI_CU36.Entidades
 
         public bool esCancelable()
         {
-            if (this.estado.nombre != "Cancelable")
+            if (this.estado.nombre == "Confirmado" || this.estado.nombre == "Pendiente de confirmacion")
             {
                 return true;
             }

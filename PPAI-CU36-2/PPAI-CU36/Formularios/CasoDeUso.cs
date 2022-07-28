@@ -56,6 +56,7 @@ namespace PPAI_CU36.Formularios
 
         public void solicitarSeleccionRT(List<DataGridViewRow> fila)
         {
+            gdrRecursos.Rows.Clear();
             for (int i = 0; i < fila.Count; i++)
             {
                 gdrRecursos.Rows.Add(fila[i]);

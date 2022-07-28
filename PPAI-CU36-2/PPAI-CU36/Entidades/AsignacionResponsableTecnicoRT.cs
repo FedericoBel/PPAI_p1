@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PPAI_CU36.Entidades
 {
@@ -38,6 +40,8 @@ namespace PPAI_CU36.Entidades
         public List<RecursosTecnologicos> obtenerRecursosDisponibles()
         {
             List<RecursosTecnologicos> recursosTecnologicosDisponibles = new List<RecursosTecnologicos>();
+
+           
 
             for (int i = 0; i < this.recursosTecnologicos.Count; i++)
             {

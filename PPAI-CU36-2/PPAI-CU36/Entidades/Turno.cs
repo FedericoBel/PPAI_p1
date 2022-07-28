@@ -21,7 +21,7 @@ namespace PPAI_CU36.Entidades
         {
             for (int i = 0; i < this.CambioEstadoTurno.Count; i++)
             {
-                if (CambioEstadoTurno[i].esActual() && this.fechaHoraFin < fechaFinPrevista)
+                if (CambioEstadoTurno[i].esActual() && this.fechaHoraInicio <= fechaFinPrevista)
                 {
                     if (CambioEstadoTurno[i].esCancelable())
                     {

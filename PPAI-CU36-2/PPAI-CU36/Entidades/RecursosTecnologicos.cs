@@ -29,7 +29,7 @@ namespace PPAI_CU36.Entidades
         public void mostrarRT()
         {
             DataGridViewRow fila = new DataGridViewRow();
-
+            
 
             DataGridViewTextBoxCell celdaTipoRecurso = new DataGridViewTextBoxCell();
             celdaTipoRecurso.Value = this.TipoRecursoTecnologico.mostrarTipoRT();
@@ -50,8 +50,8 @@ namespace PPAI_CU36.Entidades
             celdaModelo.Value = marcaYModelo[0];
             fila.Cells.Add(celdaModelo);
 
-
             GestorMC.filaGrillaRecurso.Add(fila);
+
 
         }
 
@@ -121,11 +121,15 @@ namespace PPAI_CU36.Entidades
 
         }
 
-        internal void cancelarTurnos(Estado canceladoMC)
+        internal void cancelarTurnos(Estado canceladoMC, DateTime fechaFinPrevista)
         {
             for (int i = 0; i < this.turnos.Count; i++)
             {
-                this.turnos[i].cancelarTurnos(canceladoMC);
+                if (this.turnos[i].fechaHoraInicio <= fechaFinPrevista)
+                {
+                    this.turnos[i].cancelarTurnos(canceladoMC);
+
+                }
 
             }
 

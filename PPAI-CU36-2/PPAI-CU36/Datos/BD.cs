@@ -257,6 +257,8 @@ namespace PPAI_CU36.Datos
             List<RecursosTecnologicos> listaRecursosTecnologicos = new List<RecursosTecnologicos>();
             List<CambioEstadoRT> listaCambiosEstadosRT = new List<CambioEstadoRT>();
 
+            List<CambioEstadoRT> listaCambiosEstadosRT2 = new List<CambioEstadoRT>();
+
 
             var pasado_cambioEstadoRT = new CambioEstadoRT
             {
@@ -274,6 +276,29 @@ namespace PPAI_CU36.Datos
             };
             listaCambiosEstadosRT.Add(pasado_cambioEstadoRT);
             listaCambiosEstadosRT.Add(actual_cambioEstadoRT);
+
+
+
+
+
+            var pasado_cambioEstadoRT2 = new CambioEstadoRT
+            {
+                Estado = ListaEstados()[4],
+                fechaHoraDesde = Convert.ToDateTime("06/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime("07/06/2022"),
+
+            };
+            var actual_cambioEstadoRT2 = new CambioEstadoRT
+            {
+                Estado = ListaEstados()[4],
+                fechaHoraDesde = Convert.ToDateTime("06/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime(null),
+
+            };
+            listaCambiosEstadosRT2.Add(pasado_cambioEstadoRT2);
+            listaCambiosEstadosRT2.Add(actual_cambioEstadoRT2);
+
+
 
             var marca1 = new Marca
             {
@@ -339,7 +364,7 @@ namespace PPAI_CU36.Datos
                 perioricidadMantenimientoPrev = 2,
                 duracionMantenimientoPrev = 2,
                 fraccionHorarioTurnos = 2,
-                cambioEstadoRt = listaCambiosEstadosRT,
+                cambioEstadoRt = listaCambiosEstadosRT2,
                 TipoRecursoTecnologico = tiporecurso2,
                 Modelo = modelo2,
                 mantenimientos = mante2,
