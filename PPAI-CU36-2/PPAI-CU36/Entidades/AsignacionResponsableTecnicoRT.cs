@@ -37,6 +37,7 @@ namespace PPAI_CU36.Entidades
             return false;
         }
 
+        // Obtener recursos tecnologicos disponibles
         public List<RecursosTecnologicos> obtenerRecursosDisponibles()
         {
             List<RecursosTecnologicos> recursosTecnologicosDisponibles = new List<RecursosTecnologicos>();

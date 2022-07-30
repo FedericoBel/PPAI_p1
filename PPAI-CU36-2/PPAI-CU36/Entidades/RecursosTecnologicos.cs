@@ -26,6 +26,7 @@ namespace PPAI_CU36.Entidades
         public List<Turno> turnos { get; set; }
 
 
+        // Carga de grilla con recursos tecnologicos
         public void mostrarRT()
         {
             DataGridViewRow fila = new DataGridViewRow();
@@ -56,7 +57,7 @@ namespace PPAI_CU36.Entidades
         }
 
 
-        
+        // Obtener turno cancelables 
         public List<Turno> getTurnosConfYPendConf(DateTime fechaFinPrevista)
         {
             List<Turno> turnosConfYPendConf = new List<Turno>();
@@ -85,6 +86,7 @@ namespace PPAI_CU36.Entidades
 
         }
 
+        // nuevo mantenimiento correctivo
         public void crearMantenimiento(DateTime fechaFinPrevista, DateTime fechaActual, DateTime fechaInicioPrevista, string motivo, int extension)
         {
             var nuevoManteniento = new Mantenimiento
@@ -99,6 +101,7 @@ namespace PPAI_CU36.Entidades
             this.mantenimientos.Add(nuevoManteniento);
         }
 
+        // Obtencion y cambio de estado
         internal void getEstadoActual(Estado ingresoMC)
         {
             for (int i = 0; i < this.cambioEstadoRt.Count; i++)
@@ -121,6 +124,7 @@ namespace PPAI_CU36.Entidades
 
         }
 
+        // cancelar turno
         internal void cancelarTurnos(Estado canceladoMC, DateTime fechaFinPrevista)
         {
             for (int i = 0; i < this.turnos.Count; i++)

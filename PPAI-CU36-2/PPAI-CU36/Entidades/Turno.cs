@@ -73,6 +73,7 @@ namespace PPAI_CU36.Entidades
           
         }
 
+        // cancelar turnos
         internal void cancelarTurnos(Estado canceladoMC)
         {
             for (int i = 0; i < this.CambioEstadoTurno.Count; i++)
