@@ -26,7 +26,7 @@ namespace PPAI_CU36.Entidades
         public List<Turno> turnos { get; set; }
 
 
-        // Carga de grilla con recursos tecnologicos
+        // Metodo para cargar la grilla con recursos tecnologicos...
         public void mostrarRT()
         {
             DataGridViewRow fila = new DataGridViewRow();

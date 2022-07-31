@@ -15,9 +15,13 @@ namespace PPAI_CU36
 {
     public partial class LoginForm : Form
     {
-        public GestorMC GestorMC { get; set; }
 
         static public Principal ventanaPrincipal;
+
+        static public String usuario;
+
+        static public String contraseña;
+
 
         public LoginForm()
         {
@@ -26,8 +30,6 @@ namespace PPAI_CU36
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            //var sesion = new Sesion
-
 
             bool esUsuario = false;
             List<Usuario> listaUsuarios = BD.ListaUsuarios();
@@ -43,7 +45,10 @@ namespace PPAI_CU36
 
             if(esUsuario)
             {
-                //Principal ventana = new Principal(txtUser.Text, txtPass.Text);
+
+                usuario = txtUser.Text;
+                contraseña = txtPass.Text;
+
 
                 Principal ventana = new Principal();
                 ventanaPrincipal = ventana;

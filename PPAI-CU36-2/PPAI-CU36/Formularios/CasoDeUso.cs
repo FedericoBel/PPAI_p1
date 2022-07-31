@@ -31,11 +31,13 @@ namespace PPAI_CU36.Formularios
         {
             listaEstados = BD.ListaEstados(),
             // CAMBIAR -> Los datos deben venir del Login
+
             sesion = BD.ListaSesion(),
             listaDeAsignacionResponsableTecnicoRT = BD.ListaAsignacionesResponsableTecnicoRT(),
             listaAsignacionCientificos = BD.ListaAsignacionCien(),
 
         };
+
 
         private void CasoDeUso_Load(object sender, EventArgs e)
         {
@@ -56,7 +58,7 @@ namespace PPAI_CU36.Formularios
                 gdrRecursos.Rows.Add(fila[i]);
             }
 
-            LimpiarGrilla(); 
+            limpiarGrilla(); 
 
         }
 
@@ -82,7 +84,7 @@ namespace PPAI_CU36.Formularios
         }
 
         // Metodo que limpia la grilla del CU...
-        private void LimpiarGrilla()
+        private void limpiarGrilla()
         {
             gdrTurnos.Rows.Clear();
             gdrTurnos.Refresh();
@@ -91,7 +93,7 @@ namespace PPAI_CU36.Formularios
         // Metodo para cargar la grilla de turnos...
         public void solicitarConfirmacionYNotiMC(List<DataGridViewRow> fila)
         {
-            LimpiarGrilla();
+            limpiarGrilla();
             for (int i = 0; i < fila.Count; i++)
             {
                 gdrTurnos.Rows.Add(fila[i]);
@@ -125,7 +127,7 @@ namespace PPAI_CU36.Formularios
             txtFechaFin.Text = "";
             txtRazon.Text = "";
             rdMail.Checked = true;
-            LimpiarGrilla();
+            limpiarGrilla();
         }
 
 

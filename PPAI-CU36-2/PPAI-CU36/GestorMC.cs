@@ -38,23 +38,24 @@ namespace PPAI_CU36.Entidades
             // Buscamos el personal cientifico del usuario actualmente logueado...
             PersonalCientifico personalCientificoLogueado = getUsuarioLogueado();
             
-            // metodo para obtener la asignacion de recursos para el personal cientifico logueado...
+            // Metodo para obtener la asignacion de recursos para el personal cientifico logueado...
 
             AsignacionResponsableTecnicoRT asignacionResponsableTecnicoLogueado =  getRTDisponiblesRRT(personalCientificoLogueado);
 
             this.asignacionVigenteLogueada = asignacionResponsableTecnicoLogueado;
+           
 
-            // metodo para obtener los recursos en estado disponible de la asignacionResponsableTecnicoLogueado y cargar la grilla...
+            // Metodo para obtener los recursos en estado disponible de la asignacionResponsableTecnicoLogueado y cargar la grilla...
 
             List<RecursosTecnologicos> recursosTecnologicosDisponibles = this.asignacionVigenteLogueada.obtenerRecursosDisponibles();
             
             this.recursosTecnologicosDisponibles = recursosTecnologicosDisponibles;
 
-            // ordenar los recursosTecnologicosDisponibles por tipo de recurso...
+            // Ordenar los recursosTecnologicosDisponibles por tipo de recurso...
 
             agruparRTPorTipo();
             
-            // metodo para enviar la grilla a la pantalla...
+            // Metodo para enviar la grilla a la pantalla...
 
             Principal.casoForm.solicitarSeleccionRT(filaGrillaRecurso);
 
@@ -67,7 +68,7 @@ namespace PPAI_CU36.Entidades
         }
 
 
-        // metodo para obtener la asignacion de recursos para el personal cientifico logueado...
+        // Metodo para obtener la asignacion de recursos para el personal cientifico logueado...
         public AsignacionResponsableTecnicoRT getRTDisponiblesRRT(PersonalCientifico pc)
         {
 
@@ -85,7 +86,7 @@ namespace PPAI_CU36.Entidades
             return this.listaDeAsignacionResponsableTecnicoRT[indice];
         }
 
-        // metodo que devuelve el personal cientifico del usuario actualmente logueado...
+        // Metodo que devuelve el personal cientifico del usuario actualmente logueado...
         private PersonalCientifico getUsuarioLogueado()
         {
             return this.sesion.mostrarCientificoLogueado();
@@ -141,6 +142,7 @@ namespace PPAI_CU36.Entidades
             agruparPorCientifico();
         }
 
+        // Metodo que agrupa los turnos por cientifico....
         private void agruparPorCientifico()
         {
             List<DataGridViewRow> listaAuxiliar = new List<DataGridViewRow>();
@@ -224,7 +226,7 @@ namespace PPAI_CU36.Entidades
             {
                 MessageBox.Show("Mail enviado con exito!!", "Mail", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // volvemos a cargar la grilla con los recursos disponibles
+                // volvemos a cargar la grilla con los recursos disponibles...
                 filaGrillaRecurso.Clear();
                 for (int i = 0; i < this.recursosTecnologicosDisponibles.Count; i++)
                 {

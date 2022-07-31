@@ -37,21 +37,25 @@ namespace PPAI_CU36.Entidades
             return false;
         }
 
-        // Obtener recursos tecnologicos disponibles
+        // Metodo para obtener los recursos disponibles del personal cientifico logueado...
         public List<RecursosTecnologicos> obtenerRecursosDisponibles()
         {
             List<RecursosTecnologicos> recursosTecnologicosDisponibles = new List<RecursosTecnologicos>();
 
            
-
+            // recorremos todos los recursos tecnologicos....
             for (int i = 0; i < this.recursosTecnologicos.Count; i++)
             {
+                // recorremos los cambios de estados de cada recurso...
                 for (int j = 0; j < recursosTecnologicos[i].cambioEstadoRt.Count; j++)
                 {
+                    // verificamos que sea el ultimo estado...
                     if (recursosTecnologicos[i].cambioEstadoRt[j].esUltimo())
                     {
+                        // verificamos que el estado sea activo (en estado disponible)...
                         if (recursosTecnologicos[i].cambioEstadoRt[j].Estado.esActivo())
                         {
+
                             recursosTecnologicos[i].mostrarRT();
                             recursosTecnologicosDisponibles.Add(recursosTecnologicos[i]);
                         }
