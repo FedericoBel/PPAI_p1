@@ -68,6 +68,7 @@
     <Compile Include="Entidades\CambioEstadoRT.cs" />
     <Compile Include="Entidades\CambioEstadoTurno.cs" />
     <Compile Include="Entidades\Estado.cs" />
+    <Compile Include="Entidades\InterfazMail.cs" />
     <Compile Include="GestorMC.cs" />
     <Compile Include="Entidades\Mantenimiento.cs" />
     <Compile Include="Entidades\Marca.cs" />

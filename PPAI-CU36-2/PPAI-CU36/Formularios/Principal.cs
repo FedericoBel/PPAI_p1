@@ -14,8 +14,7 @@ namespace PPAI_CU36.Formularios
 {
     public partial class Principal : Form
     {
-        //public Principal(string nombreUsu, string claveUsu)
-        static public CasoDeUso casoForm;
+        static public CasoDeUso casoDeUso;
         public Principal()
         {
             InitializeComponent();
@@ -63,11 +62,10 @@ namespace PPAI_CU36.Formularios
 
         private void btnRegistrarIngresoDeRTEnManteniemientoCorrectivo_Click(object sender, EventArgs e)
           {
-            //CasoDeUso caso = new CasoDeUso(txtNombreusu.Text, txtClaveUsu.Text);
-
             CasoDeUso caso = new CasoDeUso();
-            casoForm = caso;
+            casoDeUso = caso;
             caso.ShowDialog();
+
         }
 
         private void Principal_Load(object sender, EventArgs e)

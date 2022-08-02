@@ -30,7 +30,7 @@ namespace PPAI_CU36.Datos
                 nombre = "Francisco",
                 apellido = "Polta",
                 numeroDocumento = 44123,
-                correoElectronicoInstitucional = "123@sistemas.frc.utn.edu.ar",
+                correoElectronicoInstitucional = "franciscobegliardo@gmail.com",
                 correoElectronicoPersonal = "Franciscopolta@gmail.com",
                 telefonoCelular = 123456,
 
@@ -41,7 +41,7 @@ namespace PPAI_CU36.Datos
                 nombre = "Fede",
                 apellido = "Fernadez",
                 numeroDocumento = 44159,
-                correoElectronicoInstitucional = "456@sistemas.frc.utn.edu.ar",
+                correoElectronicoInstitucional = "federicobeluzzo02@gmail.com",
                 correoElectronicoPersonal = "Fedefernandez@gmail.com",
                 telefonoCelular = 123456,
 
@@ -53,7 +53,7 @@ namespace PPAI_CU36.Datos
                 nombre = "Erik",
                 apellido = "Salva",
                 numeroDocumento = 85488,
-                correoElectronicoInstitucional = "753@sistemas.frc.utn.edu.ar",
+                correoElectronicoInstitucional = "erikshalva@gmail.com",
                 correoElectronicoPersonal = "erikshalva@gmail.com",
                 telefonoCelular = 123456,
 

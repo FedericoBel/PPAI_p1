@@ -30,7 +30,7 @@ namespace PPAI_CU36.Entidades
         public Sesion sesion { get; set; }
         public List<AsignacionResponsableTecnicoRT> listaDeAsignacionResponsableTecnicoRT { get; set; }
         public List<AsignacionCientificoDelCI> listaAsignacionCientificos { get; set; }
-
+         
         public void nuevoIngresoMantCorrectivo()
         {
             filaGrillaRecurso.Clear();
@@ -57,7 +57,7 @@ namespace PPAI_CU36.Entidades
             
             // Metodo para enviar la grilla a la pantalla...
 
-            Principal.casoForm.solicitarSeleccionRT(filaGrillaRecurso);
+            Principal.casoDeUso.solicitarSeleccionRT(filaGrillaRecurso);
 
         }
 
@@ -156,9 +156,9 @@ namespace PPAI_CU36.Entidades
             }
             listaAuxiliar = listaAuxiliar.OrderBy(x => x.Cells[0].Value.ToString()).ToList();
 
-            Principal.casoForm.solicitarConfirmacionYNotiMC(listaAuxiliar);
+            Principal.casoDeUso.solicitarConfirmacionYNotiMC(listaAuxiliar);
 
-            this.filaGrillaTurno.Clear();
+            //this.filaGrillaTurno.Clear();
 
         }
 
@@ -213,8 +213,8 @@ namespace PPAI_CU36.Entidades
         // Metodo que cambia el estado del recurso tecnologico seleccionado y de sus turnos...
         private void buscarEstadoActual(Estado ingresoMC, Estado canceladoMC)
         {
-            recursosTecnologicosDisponibles[indiceRTS].getEstadoActual(ingresoMC);
-            recursosTecnologicosDisponibles[indiceRTS].cancelarTurnos(canceladoMC, this.fechaFinPrevista);
+            this.recursosTecnologicosDisponibles[indiceRTS].getEstadoActual(ingresoMC);
+            this.recursosTecnologicosDisponibles[indiceRTS].cancelarTurnos(canceladoMC, this.fechaFinPrevista);
 
             generarMail();
         }
@@ -222,28 +222,31 @@ namespace PPAI_CU36.Entidades
         // Metodo para generar el mail y cargar la grilla de recursos...
         private void generarMail()
         {
+
+           
             if (!this.notificacion)
             {
-                MessageBox.Show("Mail enviado con exito!!", "Mail", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // volvemos a cargar la grilla con los recursos disponibles...
-                filaGrillaRecurso.Clear();
-                for (int i = 0; i < this.recursosTecnologicosDisponibles.Count; i++)
+                for (int i = 0; i < filaGrillaTurno.Count; i++)
                 {
-                    for (int j = 0; j < this.recursosTecnologicosDisponibles[i].cambioEstadoRt.Count; j++)
+                    for (int j = 0; j < filaGrillaTurno[i].Count; j++)
                     {
-                        if (this.recursosTecnologicosDisponibles[i].cambioEstadoRt[j].esUltimo())
-                        {
-                            if (this.recursosTecnologicosDisponibles[i].cambioEstadoRt[j].Estado.esActivo())
-                            {
-                                this.recursosTecnologicosDisponibles[i].mostrarRT();
-                            }
-                        }
+                        InterfazMail interfezParaMail = new InterfazMail();
+                        string body = @"<style>
+                            h1{color:dodgerblue;}
+                            h2{color:darkorange;}
+                            </style>
+                            <h1>Su turno para " + this.recursosTecnologicosDisponibles[indiceRTS].TipoRecursoTecnologico.nombre.ToString() + " en fecha: " + filaGrillaTurno[i][j].Cells[2].Value.ToString() + " fue cancelado por motivos de mantenimiento</h1></br>" +
+                            "<h2>Disculpe las molestias, muchas gracias!</h2>";
+                        interfezParaMail.mailDeCancelacion(filaGrillaTurno[i][j].Cells[1].Value.ToString(), "Cancelación turno recurso tecnologico", body);
+
+
                     }
                 }
 
+               
+                MessageBox.Show("Mail enviado con exito!!", "Mail", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                Principal.casoForm.solicitarSeleccionRT(filaGrillaRecurso);
 
             }
             else
@@ -256,8 +259,7 @@ namespace PPAI_CU36.Entidades
 
         private void finCU()
         {
-            MessageBox.Show("Muchas gracias", "Funciono", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            Principal.casoDeUso.Close();
         }
     }
 }

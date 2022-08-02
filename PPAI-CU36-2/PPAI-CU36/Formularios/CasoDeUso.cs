@@ -27,11 +27,9 @@ namespace PPAI_CU36.Formularios
         // instaciamos el GestorMC
         // BD: tiene todas las instancias necesarias
 
-        GestorMC gestorMC = new GestorMC
+        public static GestorMC gestorMC = new GestorMC
         {
             listaEstados = BD.ListaEstados(),
-            // CAMBIAR -> Los datos deben venir del Login
-
             sesion = BD.ListaSesion(),
             listaDeAsignacionResponsableTecnicoRT = BD.ListaAsignacionesResponsableTecnicoRT(),
             listaAsignacionCientificos = BD.ListaAsignacionCien(),

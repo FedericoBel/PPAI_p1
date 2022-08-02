@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PPAI_CU36.Datos;
+using PPAI_CU36.Entidades;
 
 namespace PPAI_CU36
 {
@@ -18,6 +20,7 @@ namespace PPAI_CU36
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new LoginForm());
+
         }
     }
 }
