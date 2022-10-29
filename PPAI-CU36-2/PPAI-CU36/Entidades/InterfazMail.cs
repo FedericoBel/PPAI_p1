@@ -13,7 +13,7 @@ namespace PPAI_CU36.Entidades
         public string mailDeCancelacion(string to, string asunto, string body)
         {
             string msge = "Error al enviar este correo. Por favor verifique los datos o intente más tarde.";
-            string from = "uni.nacional_GestRecursTecnologicos@outlook.es";
+            string from = "uni.nacional_GestRecursTecnologicos1@outlook.es";
             string displayName = "Universidad Nacional";
             try
             {

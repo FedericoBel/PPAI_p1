@@ -147,11 +147,11 @@ namespace PPAI_CU36.Entidades
         {
             List<DataGridViewRow> listaAuxiliar = new List<DataGridViewRow>();
 
-            for (int i = 0; i < filaGrillaTurno.Count; i++)
+            for (int i = 0; i < this.filaGrillaTurno.Count; i++)
             {
-                for (int j = 0; j < filaGrillaTurno[i].Count; j++)
+                for (int j = 0; j < this.filaGrillaTurno[i].Count; j++)
                 {
-                    listaAuxiliar.Add(filaGrillaTurno[i][j]);
+                    listaAuxiliar.Add(this.filaGrillaTurno[i][j]);
                 }
             }
             listaAuxiliar = listaAuxiliar.OrderBy(x => x.Cells[0].Value.ToString()).ToList();
@@ -188,7 +188,7 @@ namespace PPAI_CU36.Entidades
 
             for (int i = 0; i < this.listaEstados.Count; i++)
             {
-                if (this.listaEstados[i].esAmbitoRT())
+                if (this.listaEstados[i].esAmbitoRT()) 
                 {
                     if (this.listaEstados[i].esIngresoAMC())
                     {
@@ -227,9 +227,9 @@ namespace PPAI_CU36.Entidades
             if (!this.notificacion)
             {
 
-                for (int i = 0; i < filaGrillaTurno.Count; i++)
+                for (int i = 0; i < this.filaGrillaTurno.Count; i++)
                 {
-                    for (int j = 0; j < filaGrillaTurno[i].Count; j++)
+                    for (int j = 0; j < this.filaGrillaTurno[i].Count; j++)
                     {
                         InterfazMail interfezParaMail = new InterfazMail();
                         string body = @"<style>
@@ -238,7 +238,8 @@ namespace PPAI_CU36.Entidades
                             </style>
                             <h1>Su turno para " + this.recursosTecnologicosDisponibles[indiceRTS].TipoRecursoTecnologico.nombre.ToString() + " en fecha: " + filaGrillaTurno[i][j].Cells[2].Value.ToString() + " fue cancelado por motivos de mantenimiento</h1></br>" +
                             "<h2>Disculpe las molestias, muchas gracias!</h2>";
-                        interfezParaMail.mailDeCancelacion(filaGrillaTurno[i][j].Cells[1].Value.ToString(), "Cancelación turno recurso tecnologico", body);
+                      
+                        interfezParaMail.mailDeCancelacion(this.filaGrillaTurno[i][j].Cells[1].Value.ToString(), "Cancelación turno recurso tecnologico", body);
 
 
                     }
