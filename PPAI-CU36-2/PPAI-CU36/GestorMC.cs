@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace PPAI_CU36.Entidades
 {
-    public class GestorMC
+    public class GestorMC: ISujeto
     {
         public DateTime fechaFinPrevista { get; set; }
         public string motivo { get; set; }
@@ -30,7 +30,8 @@ namespace PPAI_CU36.Entidades
         public Sesion sesion { get; set; }
         public List<AsignacionResponsableTecnicoRT> listaDeAsignacionResponsableTecnicoRT { get; set; }
         public List<AsignacionCientificoDelCI> listaAsignacionCientificos { get; set; }
-         
+        public List<IObservadoresNotificacion> observadores { get; set; }
+
         public void nuevoIngresoMantCorrectivo()
         {
             filaGrillaRecurso.Clear();
@@ -168,9 +169,33 @@ namespace PPAI_CU36.Entidades
             this.confirmacion = confirmacion;
             this.notificacion = notificacion;
 
+            IObservadoresNotificacion observador = crearObservadores(notificacion);
+            suscribir(observador);
+    
+
             crearMantenimiento();
             List<int> listaIndicesEstados = buscarEstados();
             buscarEstadoActual(this.listaEstados[listaIndicesEstados[0]], this.listaEstados[listaIndicesEstados[1]]);
+
+         
+            
+        }
+
+
+        private IObservadoresNotificacion crearObservadores(bool tipoNotififacion)
+        {
+            if (!tipoNotififacion)
+            {
+                InterfazMail interfazMail = new InterfazMail();
+
+                return interfazMail;
+            }
+            else
+            {
+                return null;
+            }
+            
+
         }
 
         // Metodo para crear un mantenimiento...
@@ -227,23 +252,7 @@ namespace PPAI_CU36.Entidades
             if (!this.notificacion)
             {
 
-                for (int i = 0; i < this.filaGrillaTurno.Count; i++)
-                {
-                    for (int j = 0; j < this.filaGrillaTurno[i].Count; j++)
-                    {
-                        InterfazMail interfezParaMail = new InterfazMail();
-                        string body = @"<style>
-                            h1{color:dodgerblue;}
-                            h2{color:darkorange;}
-                            </style>
-                            <h1>Su turno para " + this.recursosTecnologicosDisponibles[indiceRTS].TipoRecursoTecnologico.nombre.ToString() + " en fecha: " + filaGrillaTurno[i][j].Cells[2].Value.ToString() + " fue cancelado por motivos de mantenimiento</h1></br>" +
-                            "<h2>Disculpe las molestias, muchas gracias!</h2>";
-                      
-                        interfezParaMail.mailDeCancelacion(this.filaGrillaTurno[i][j].Cells[1].Value.ToString(), "Cancelación turno recurso tecnologico", body);
-
-
-                    }
-                }
+                notificar();
 
                
                 MessageBox.Show("Mail enviado con exito!!", "Mail", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -261,6 +270,39 @@ namespace PPAI_CU36.Entidades
         private void finCU()
         {
             Principal.casoDeUso.Close();
+        }
+
+        public void notificar()
+        {
+            for (int i = 0; i < this.filaGrillaTurno.Count; i++)
+            {
+                for (int j = 0; j < this.filaGrillaTurno[i].Count; j++)
+                {
+                
+                    string body = @"<style>
+                            h1{color:dodgerblue;}
+                            h2{color:darkorange;}
+                            </style>
+                            <h1>Su turno para " + this.recursosTecnologicosDisponibles[indiceRTS].TipoRecursoTecnologico.nombre.ToString() + " en fecha: " + filaGrillaTurno[i][j].Cells[2].Value.ToString() + " fue cancelado por motivos de mantenimiento</h1></br>" +
+                        "<h2>Disculpe las molestias, muchas gracias!</h2>";
+
+                    this.observadores[0].enviarNotificacion(this.filaGrillaTurno[i][j].Cells[1].Value.ToString(), "Cancelación turno recurso tecnologico", body);
+
+
+                }
+            }
+        }
+
+        public void quitar(IObservadoresNotificacion o)
+        {
+            this.observadores.Remove(o);
+        }
+
+        public void suscribir(IObservadoresNotificacion o)
+        {
+            List<IObservadoresNotificacion> observadores1 = new List<IObservadoresNotificacion>();
+            observadores1.Add(o);
+            this.observadores = observadores1;
         }
     }
 }

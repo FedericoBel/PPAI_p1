@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace PPAI_CU36.Entidades
 {
-    public class InterfazMail
+    public class InterfazMail: IObservadoresNotificacion
     {
-        public string mailDeCancelacion(string to, string asunto, string body)
+        public string enviarNotificacion(string to, string asunto, string body)
         {
             string msge = "Error al enviar este correo. Por favor verifique los datos o intente más tarde.";
             string from = "uni.nacional_GestRecursTecnologicos1@outlook.es";
