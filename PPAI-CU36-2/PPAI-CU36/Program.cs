@@ -19,6 +19,9 @@ namespace PPAI_CU36
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            Iterador i = new Iterador();
+            i.iteradorMarca();
             Application.Run(new LoginForm());
 
         }

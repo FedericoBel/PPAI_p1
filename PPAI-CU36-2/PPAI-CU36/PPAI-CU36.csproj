@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -63,6 +64,14 @@
     <Compile Include="Datos\DAO\TurnoDAO.cs" />
     <Compile Include="Datos\DAO\UsuarioDAO.cs" />
     <Compile Include="Datos\DBHelper.cs" />
+    <Compile Include="Datos\Iterador.cs" />
+    <Compile Include="Datos\Models\CambioEstadoRTModel.cs" />
+    <Compile Include="Datos\Models\EstadoModel.cs" />
+    <Compile Include="Datos\Models\MantenimientoModel.cs" />
+    <Compile Include="Datos\Models\MarcaModel.cs" />
+    <Compile Include="Datos\Models\ModeloModel.cs" />
+    <Compile Include="Datos\Models\RecursoTecnologicoModel.cs" />
+    <Compile Include="Datos\Models\TipoRecursoTecnologicoModel.cs" />
     <Compile Include="Entidades\AsignacionCientificoDelCI.cs" />
     <Compile Include="Entidades\AsignacionResponsableTecnicoRT.cs" />
     <Compile Include="Entidades\CambioEstadoRT.cs" />
