@@ -15,6 +15,11 @@ namespace PPAI_CU36.Entidades
         private PersonalCientifico personalCientifico;
 
 
+        // constructor vacio generado para uso en la materializacion
+        public Usuario()
+        {
+        }
+
         // constructor
         public Usuario(int idusuario, string claveusu, string usuariousu, bool habilitadousu, PersonalCientifico personalcientifico)
         {

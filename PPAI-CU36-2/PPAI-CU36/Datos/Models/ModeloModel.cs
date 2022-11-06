@@ -13,6 +13,7 @@ namespace PPAI_CU36.Datos.Models
         private string Tabla = "Modelo"; 
         public string BDString = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"];
         private MarcaModel marcaModel = new MarcaModel();
+
         public void desmaterializar(Modelo modelo)
         {
             string consulta = "INSERT INTO Modelo VALUES (" + modelo.nombre + "," +

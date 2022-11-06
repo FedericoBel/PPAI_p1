@@ -70,6 +70,9 @@
     <Compile Include="Datos\Models\MantenimientoModel.cs" />
     <Compile Include="Datos\Models\MarcaModel.cs" />
     <Compile Include="Datos\Models\ModeloModel.cs" />
+    <Compile Include="Datos\Models\SesionModel.cs" />
+    <Compile Include="Datos\Models\UsuarioModel.cs" />
+    <Compile Include="Datos\Models\PersonalCientificoModel.cs" />
     <Compile Include="Datos\Models\RecursoTecnologicoModel.cs" />
     <Compile Include="Datos\Models\TipoRecursoTecnologicoModel.cs" />
     <Compile Include="Entidades\AsignacionCientificoDelCI.cs" />
