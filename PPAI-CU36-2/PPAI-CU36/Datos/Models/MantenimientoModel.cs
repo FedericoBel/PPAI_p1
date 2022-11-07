@@ -17,17 +17,20 @@ namespace PPAI_CU36.Datos.Models
         public void desmaterializar(Mantenimiento mantenimiento, int idRT)
         {
 
-            string consulta = "INSERT INTO " + this.Tabla + " VALUES (" + mantenimiento.fechaInicio + ", "
-                                                                        + mantenimiento.fechaFin + ", "
-                                                                        + mantenimiento.fechaInicioPrevista + ", "
-                                                                        + mantenimiento.motivoMantenimiento + ", "
+            string consulta = "INSERT INTO " + this.Tabla + " VALUES ( @FI,@FF,@FIP"
+                                                                        + mantenimiento.motivoMantenimiento + "', "
                                                                         +  idRT + ")";
             try
             {
                 SqlConnection con = new SqlConnection(this.BDString);
                 con.Open();
                 SqlCommand cmd = new SqlCommand(consulta, con);
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@FI", mantenimiento.fechaInicio);
+                cmd.Parameters.AddWithValue("@FF", mantenimiento.fechaFin);
+                cmd.Parameters.AddWithValue("@FIP", mantenimiento.fechaInicioPrevista);
                 cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
                 con.Close();
             }
             catch (Exception e)
@@ -38,7 +41,7 @@ namespace PPAI_CU36.Datos.Models
 
         public List<Mantenimiento> materializar(int RT)
         {
-            string consulta = "SELECT FROM " + this.Tabla + " WHERE idRecursoTecnologico LIKE" + RT;
+            string consulta = "SELECT * FROM " + this.Tabla + " WHERE idRecursoTecnologico LIKE " + RT;
             List<Mantenimiento> rta = new List<Mantenimiento> { };
 
             try

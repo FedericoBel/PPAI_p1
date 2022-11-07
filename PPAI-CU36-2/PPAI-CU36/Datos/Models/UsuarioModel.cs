@@ -17,10 +17,10 @@ namespace PPAI_CU36.Datos.Models
 
         public void desmaterializar(Usuario usuario)
         {
-            string consulta = "INSERT INTO " + this.tabla + " VALUES ('" + usuario.claveDeUsuario + ","
-                                                            + usuario.estahabilitado + ","
-                                                            + usuario.nombreUsuario + ","
-            + "(SELECT id FROM PersonalCientifico WHERE Nombre LIKE " + usuario.personalcientifico.nombre + "))";
+            string consulta = "INSERT INTO " + this.tabla + " VALUES ('" + usuario.claveDeUsuario + "',"
+                                                            + Convert.ToByte(usuario.estahabilitado) + ",'"
+                                                            + usuario.nombreUsuario + "',"
+                                                            + usuario.personalcientifico.legajo + ")";
             try
             {
                 SqlConnection con = new SqlConnection(this.BDString);
@@ -79,5 +79,49 @@ namespace PPAI_CU36.Datos.Models
 
             return rta;
         }
+
+        public List<Usuario> ObtenerUsuarios()
+        {
+            string consulta = "SELECT * FROM Usuario ";
+            List<Usuario> usuarios = new List<Usuario>();
+            try {
+                SqlConnection con = new SqlConnection(this.BDString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand(consulta, con);
+                cmd.ExecuteNonQuery();
+
+                SqlDataReader Data = cmd.ExecuteReader();
+
+                while(Data.Read())
+                {
+                    int idUsuario = (int)Data["id"];
+                    string clave = Data["Clave"].ToString();
+                    Boolean habilitado = (bool)Data["habilitado"];
+                    string usuario = Data["usuario"].ToString();
+                    PersonalCientifico personalCientifico = this.personalCientificoModel.materializar((int)Data["idPersonalCientifico"]);
+
+                    Usuario usu = new Usuario
+                    {
+                        idUsuario = idUsuario,
+                        claveDeUsuario = clave,
+                        estahabilitado = habilitado,
+                        nombreUsuario = usuario,
+                        personalcientifico = personalCientifico
+                    };
+                    usuarios.Add(usu);
+                }
+                con.Close();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return usuarios;
+        }
+
+
+
+
     }
 }

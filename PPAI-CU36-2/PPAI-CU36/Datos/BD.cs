@@ -49,7 +49,7 @@ namespace PPAI_CU36.Datos
 
             var pc3 = new PersonalCientifico
             {
-                legajo = 123,
+                legajo = 789,
                 nombre = "Erik",
                 apellido = "Salva",
                 numeroDocumento = 85488,
@@ -488,7 +488,7 @@ namespace PPAI_CU36.Datos
         {
             var sesion1 = new Sesion
             {
-                Usuario = ListaUsuarios()[0],
+                Usuario = ListaUsuarios()[1],
                 fechaHoraInicio = DateTime.Now,
                 fechaHoraFin = Convert.ToDateTime(null),
             };
@@ -501,6 +501,7 @@ namespace PPAI_CU36.Datos
             List<AsignacionResponsableTecnicoRT> listaAsignacionesResponsableTecnicoRT = new List<AsignacionResponsableTecnicoRT>();
             var asigrt1_vigente = new AsignacionResponsableTecnicoRT
             {
+                id = 1,
                 fechaDesde = Convert.ToDateTime("09/06/2022"),
                 fechaHasta = Convert.ToDateTime(null),
                 recursosTecnologicos = ListaRecursos(),
@@ -509,6 +510,7 @@ namespace PPAI_CU36.Datos
 
             var asigrt1_noVigente = new AsignacionResponsableTecnicoRT
             {
+                id = 2,
                 fechaDesde = Convert.ToDateTime("09/06/2022"),
                 fechaHasta = Convert.ToDateTime("10/06/2022"),
                 recursosTecnologicos = ListaRecursos(),
@@ -531,6 +533,7 @@ namespace PPAI_CU36.Datos
             //recurso 1
             var asigCien_1 = new AsignacionCientificoDelCI
             {
+                id = 0,
                 fechaDesde = Convert.ToDateTime("05/06/2022"),
                 fechaHasta = Convert.ToDateTime("20/06/2022"),
                 personalCientifico = ListaPersonal()[0], // francisco
@@ -540,6 +543,8 @@ namespace PPAI_CU36.Datos
             //recurso 2
             var asigCien_2 = new AsignacionCientificoDelCI
             {
+                id = 1,
+
                 fechaDesde = Convert.ToDateTime("05/06/2022"),
                 fechaHasta = Convert.ToDateTime("20/06/2022"),
                 personalCientifico = ListaPersonal()[1], // fede
@@ -548,6 +553,7 @@ namespace PPAI_CU36.Datos
 
             var asigCien_3 = new AsignacionCientificoDelCI
             {
+                id = 2,
                 fechaDesde = Convert.ToDateTime("05/06/2022"),
                 fechaHasta = Convert.ToDateTime("20/06/2022"),
                 personalCientifico = ListaPersonal()[2], // erik

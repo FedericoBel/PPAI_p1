@@ -8,7 +8,7 @@ namespace PPAI_CU36.Entidades
 {
     public class Usuario
     {
-        private int idUsuario;
+        public int idUsuario { get; set; }
         private string clave;
         private string usuario;
         private Boolean habilitado;

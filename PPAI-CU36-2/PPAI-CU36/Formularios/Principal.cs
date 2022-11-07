@@ -1,4 +1,5 @@
-﻿using PPAI_CU36.Entidades;
+﻿using PPAI_CU36.Datos.Models;
+using PPAI_CU36.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace PPAI_CU36.Formularios
     public partial class Principal : Form
     {
         static public CasoDeUso casoDeUso;
+        public Usuario usuariologeado { get; set; }
         public Principal()
         {
             InitializeComponent();
@@ -62,15 +64,22 @@ namespace PPAI_CU36.Formularios
 
         private void btnRegistrarIngresoDeRTEnManteniemientoCorrectivo_Click(object sender, EventArgs e)
           {
-            CasoDeUso caso = new CasoDeUso();
+            CasoDeUso caso = new CasoDeUso ();
             casoDeUso = caso;
-            caso.ShowDialog();
+            caso.Show();
 
         }
 
         private void Principal_Load(object sender, EventArgs e)
         {
-
+            SesionModel sm = new SesionModel();
+            Sesion sesion = new Sesion
+            {
+                Usuario = usuariologeado,
+                fechaHoraInicio = DateTime.Now,
+                fechaHoraFin = Convert.ToDateTime(DateTime.Now.AddHours(1))
+            };
+            sm.desmaterializar(sesion);
         }
 
         private void titleBar_MouseMove(object sender, MouseEventArgs e)

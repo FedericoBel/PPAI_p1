@@ -36,7 +36,7 @@ namespace PPAI_CU36.Datos.Models
 
         public Marca materializar(int idMarca)
         {
-            string consulta = "SELECT FROM " + this.Tabla + " WHERE id LIKE"+ idMarca;
+            string consulta = "SELECT * FROM " + this.Tabla + " WHERE id LIKE "+ idMarca;
             Marca rta = new Marca();
 
             try

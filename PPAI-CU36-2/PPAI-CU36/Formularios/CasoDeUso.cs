@@ -1,4 +1,5 @@
 ﻿using PPAI_CU36.Datos;
+using PPAI_CU36.Datos.Models;
 using PPAI_CU36.Entidades;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace PPAI_CU36.Formularios
 {
     public partial class CasoDeUso : Form
     {
+
+       
         public CasoDeUso()
         {
             // habilitar pantalla...
@@ -29,10 +32,10 @@ namespace PPAI_CU36.Formularios
 
         public static GestorMC gestorMC = new GestorMC
         {
-            listaEstados = BD.ListaEstados(),
-            sesion = BD.ListaSesion(),
-            listaDeAsignacionResponsableTecnicoRT = BD.ListaAsignacionesResponsableTecnicoRT(),
-            listaAsignacionCientificos = BD.ListaAsignacionCien(),
+            listaEstados = new EstadoModel().ObtenerEstados(),
+            sesion = new SesionModel().ObtenerSesion(),
+            listaDeAsignacionResponsableTecnicoRT = new AsignacionResponsableTecnicoModel().ObtenerAsignacionesResponsableTecnicoRT(),
+            listaAsignacionCientificos = new AsignacionCientificoDelCIModel().ObtenerAsignacionesCientificoDelCI(),
 
         };
 

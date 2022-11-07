@@ -17,33 +17,44 @@ namespace PPAI_CU36.Datos.Models
         private TipoRecursoTecnologicoModel TipoRTModel = new TipoRecursoTecnologicoModel();
         private MantenimientoModel MantenimientoModel = new MantenimientoModel();
         private CambioEstadoRTModel cambioRTModel = new CambioEstadoRTModel();
+        private TurnoModel turnoModel = new TurnoModel();
         public void desmaterializar(RecursosTecnologicos RT)
         {
-
-            string consulta = "INSERT INTO Modelo VALUES (" + RT.numeroRT + ", "
+            
+            string consulta = "INSERT INTO "+ this.Tabla +" VALUES (" + RT.numeroRT + ", "
                                                             + RT.duracionMantenimientoPrev + ", "
-                                                            + RT.fechaAlta + ", "
+                                                            + "@Fal, "
                                                             + RT.fraccionHorarioTurnos + ", "
-         + "(SELECT id FROM TipoRecursoTecnologico WHERE nombre LIKE " + RT.TipoRecursoTecnologico.nombre +"), " 
-         + "(SELECT id FROM Modelo WHERE nombre LIKE " + RT.Modelo.nombre + " )" + ", " + RT.imagenes + ", " 
+         + "(SELECT id FROM TipoRecursoTecnologico WHERE nombre LIKE '" + RT.TipoRecursoTecnologico.nombre +"'), " 
+         + "(SELECT id FROM Modelo WHERE nombre LIKE '" + RT.Modelo.nombre + "')" + ", " + RT.imagenes + ", " 
          + RT.perioricidadMantenimientoPrev+")";
 
             try
             {
-                SqlConnection con = new SqlConnection(this.BDString);
-                con.Open();
-                SqlCommand cmd = new SqlCommand(consulta, con);
-                cmd.ExecuteNonQuery();
-                con.Close();
 
                 foreach (var item in RT.mantenimientos)
                 {
-                    this.MantenimientoModel.desmaterializar(item,RT.numeroRT);
+                    this.MantenimientoModel.desmaterializar(item, RT.numeroRT);
                 }
 
-                foreach (var item in RT.cambioEstadoRt )
+                this.TipoRTModel.desmaterializar(RT.TipoRecursoTecnologico);
+            
+                SqlConnection con = new SqlConnection(this.BDString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand(consulta, con);
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.AddWithValue("@Fal", RT.fechaAlta);
+                cmd.ExecuteNonQuery();
+                con.Close();
+         
+                foreach (var item in RT.cambioEstadoRt)
                 {
-                    this.cambioRTModel.desmaterializar(item,RT.numeroRT);
+                    this.cambioRTModel.desmaterializar(item, RT.numeroRT);
+                }
+                foreach (var item in RT.turnos)
+                {
+                    this.turnoModel.desmaterializar(item, RT.numeroRT);
                 }
             }
             catch (Exception e)
@@ -54,7 +65,7 @@ namespace PPAI_CU36.Datos.Models
 
         public RecursosTecnologicos materializar(int idRecursoTecnologico)
         {
-            string consulta = "SELECT FROM " + this.Tabla + " WHERE id LIKE" + idRecursoTecnologico;
+            string consulta = "SELECT * FROM " + this.Tabla + " WHERE numero LIKE " + idRecursoTecnologico;
             RecursosTecnologicos rta = new RecursosTecnologicos();
 
             try
@@ -87,7 +98,7 @@ namespace PPAI_CU36.Datos.Models
                     rta.perioricidadMantenimientoPrev = periodicidad;
                     rta.mantenimientos = this.MantenimientoModel.materializar(Numero);
                     rta.cambioEstadoRt = this.cambioRTModel.materializar(Numero);
-
+                    rta.turnos = this.turnoModel.materializar(Numero, "IdRecursoTecnologico");
 
                 }
 

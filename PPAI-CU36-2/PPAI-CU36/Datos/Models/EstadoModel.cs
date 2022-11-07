@@ -18,10 +18,10 @@ namespace PPAI_CU36.Datos.Models
         public void desmaterializar(Estado estado)
         {
 
-            string consulta = "INSERT INTO " + this.Tabla + " VALUES ('" + estado.ambito + ","
-                                                                         + estado.descripcion + ","                                       
-                                                                         + estado.esCancelable + ","
-                                                                         + estado.esReservable + ","
+            string consulta = "INSERT INTO " + this.Tabla + " VALUES ('" + estado.ambito + "','"
+                                                                         + estado.descripcion + "',"                                       
+                                                                         + Convert.ToByte(estado.esCancelable) + ","
+                                                                         + Convert.ToByte(estado.esReservable) + ",'"
                                                                          + estado.nombre + "')";
 
             try
@@ -41,7 +41,7 @@ namespace PPAI_CU36.Datos.Models
 
         public Estado materializar(int IdEst)
         {
-            string consulta = "SELECT FROM " + this.Tabla + " WHERE id LIKE" + IdEst;
+            string consulta = "SELECT * FROM " + this.Tabla + " WHERE id LIKE " + IdEst;
             Estado rta = new Estado();
 
             try
@@ -58,7 +58,7 @@ namespace PPAI_CU36.Datos.Models
                     string Nombre = Data["nombre"].ToString();
                     string Ambito = Data["ambito"].ToString();
                     string Descripcion = Data["descripcion"].ToString();
-                    bool cancelable = (bool) Data["esCanselable"];
+                    bool cancelable = (bool) Data["esCancelable"];
                     bool Reservable = (bool) Data["esReservable"];
 
                     rta.nombre = Nombre;
@@ -77,5 +77,51 @@ namespace PPAI_CU36.Datos.Models
 
             return rta;
         }
+
+        public List<Estado> ObtenerEstados()
+        {
+            string consulta = "SELECT * FROM " + this.Tabla ;
+            List<Estado> estados = new List<Estado>();
+
+            try
+            {
+                SqlConnection con = new SqlConnection(this.BDString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand(consulta, con);
+                cmd.ExecuteNonQuery();
+
+                SqlDataReader Data = cmd.ExecuteReader();
+
+                while (Data.Read())
+                {
+                    string Nombre = Data["nombre"].ToString();
+                    string Ambito = Data["ambito"].ToString();
+                    string Descripcion = Data["descripcion"].ToString();
+                    bool cancelable = Convert.ToBoolean(Data["esCancelable"]);
+                    bool Reservable = Convert.ToBoolean(Data["esReservable"]);
+
+                    Estado est = new Estado
+                    {
+                        nombre = Nombre,
+                        ambito = Ambito,
+                        descripcion = Descripcion,
+                        esCancelable = cancelable,
+                        esReservable = Reservable
+                    };
+
+                    estados.Add(est);
+                }
+
+                con.Close();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return estados;
+        }
+
+
     }
 }

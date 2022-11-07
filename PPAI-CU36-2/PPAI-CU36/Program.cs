@@ -21,7 +21,7 @@ namespace PPAI_CU36
             Application.SetCompatibleTextRenderingDefault(false);
 
             Iterador i = new Iterador();
-            i.iteradorMarca();
+            i.iteradorRTM();
             Application.Run(new LoginForm());
 
         }

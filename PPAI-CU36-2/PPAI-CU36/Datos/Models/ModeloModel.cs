@@ -16,8 +16,8 @@ namespace PPAI_CU36.Datos.Models
 
         public void desmaterializar(Modelo modelo)
         {
-            string consulta = "INSERT INTO Modelo VALUES (" + modelo.nombre + "," +
-                            "(SELECT id FROM Marca WHERE Nombre LIKE " + modelo.marca.nombre + "))";
+            string consulta = "INSERT INTO "+ this.Tabla +" VALUES ('" + modelo.nombre + "', " 
+                + "(SELECT id FROM Marca WHERE Nombre LIKE '" + modelo.marca.nombre + "'))";
             try
             {
                 SqlConnection con = new SqlConnection(this.BDString);
@@ -48,7 +48,7 @@ namespace PPAI_CU36.Datos.Models
 
                 if (Data.Read())
                 {
-                    string Nombre = Data["Nombre"].ToString();
+                    string Nombre = Data["nombre"].ToString();
                     rta.nombre = Nombre;
                     rta.marca = this.marcaModel.materializar((int) Data["idMarca"]);
 

@@ -17,14 +17,13 @@ namespace PPAI_CU36.Datos.Models
         public void desmaterializar(PersonalCientifico personalCientifico)
         {
 
-            string consulta = "INSERT INTO " + this.Tabla + " VALUES ('" + personalCientifico.legajo + "," 
-                                                            + personalCientifico.apellido + ","
-                                                            + personalCientifico.correoElectronicoInstitucional + ","
-                                                            + personalCientifico.correoElectronicoPersonal + ","
-                                                            + personalCientifico.nombre + ","
-                                                            + personalCientifico.numeroDocumento + ","
-                                                            + personalCientifico.telefonoCelular + ","
-                                                            + "')";
+            string consulta = "INSERT INTO " + this.Tabla + " VALUES (" + personalCientifico.legajo + ",'" 
+                                                            + personalCientifico.apellido + "','"
+                                                            + personalCientifico.correoElectronicoInstitucional + "','"
+                                                            + personalCientifico.correoElectronicoPersonal + "','"
+                                                            + personalCientifico.nombre + "',"
+                                                            + personalCientifico.numeroDocumento + ",'"
+                                                            + personalCientifico.telefonoCelular + "')";
             try
             {
                 SqlConnection con = new SqlConnection(this.BDString);
@@ -42,7 +41,7 @@ namespace PPAI_CU36.Datos.Models
 
         public PersonalCientifico materializar(int legajo)
         {
-            string consulta = "SELECT FROM " + this.Tabla + " WHERE legajo LIKE" + legajo;
+            string consulta = "SELECT * FROM " + this.Tabla + " WHERE legajo LIKE " + legajo;
             PersonalCientifico rta = new PersonalCientifico();
 
             try
@@ -63,13 +62,13 @@ namespace PPAI_CU36.Datos.Models
                     int numeroDocumento = (int)Data["numeroDocumento"];
                     int telefonoCelular = (int)Data["telefonoCelular"];
 
-                    rta.legajo = legajo;
-                    rta.apellido = apellido;
-                    rta.correoElectronicoInstitucional = correoElectronicoInstitucional;
-                    rta.correoElectronicoPersonal = correoElectronicoPersonal; 
-                    rta.nombre = nombre;
-                    rta.numeroDocumento = numeroDocumento; 
-                    rta.telefonoCelular = telefonoCelular;
+                    rta.legajo = (int)legajo;
+                    rta.apellido = (string)apellido;
+                    rta.correoElectronicoInstitucional = (string)correoElectronicoInstitucional;
+                    rta.correoElectronicoPersonal =(string) correoElectronicoPersonal; 
+                    rta.nombre = (string) nombre;
+                    rta.numeroDocumento = (int) numeroDocumento; 
+                    rta.telefonoCelular = (int)telefonoCelular;
                 }
 
                 con.Close();

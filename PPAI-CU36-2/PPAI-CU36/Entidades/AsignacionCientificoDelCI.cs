@@ -9,6 +9,7 @@ namespace PPAI_CU36.Entidades
 {
     public class AsignacionCientificoDelCI
     {
+        public int id { get; set; }
         public DateTime fechaDesde { get; set; }
         public DateTime fechaHasta { get; set; }
         public PersonalCientifico personalCientifico { get; set; }

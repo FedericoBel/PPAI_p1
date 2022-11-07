@@ -17,15 +17,17 @@ namespace PPAI_CU36.Datos.Models
 
         public void desmaterializar(Sesion sesion)
         {
-            string consulta = "INSERT INTO " + this.tabla + " VALUES ('" + sesion.fechaHoraInicio + ","
-                                                            + sesion.fechaHoraFin + ","
-            + "(SELECT id FROM Usuario WHERE usuario LIKE " + sesion.Usuario.nombreUsuario + "))";
+            string consulta = "INSERT INTO " + this.tabla + " (fechaHoraInicio,fechaHoraFin,idUsuario ) VALUES ( @FHI,@FHF,"
+            + "(SELECT id FROM Usuario WHERE usuario LIKE '" + sesion.Usuario.nombreUsuario + "'))";
 
             try
             {
                 SqlConnection con = new SqlConnection(this.BDString);
                 con.Open();
                 SqlCommand cmd = new SqlCommand(consulta, con);
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@FHI",sesion.fechaHoraInicio);
+                cmd.Parameters.AddWithValue("@FHf",sesion.fechaHoraFin);
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
@@ -81,5 +83,43 @@ namespace PPAI_CU36.Datos.Models
 
             return rta;
         }
+        public Sesion ObtenerSesion()
+        {
+            string consulta = "SELECT TOP(1) * FROM "+this.tabla+" ORDER BY fechaHoraInicio DESC";
+            Sesion session = new Sesion();
+
+            try
+            {
+                SqlConnection con = new SqlConnection(this.BDString);
+                con.Open();
+                SqlCommand cmd = new SqlCommand(consulta, con);
+                cmd.ExecuteNonQuery();
+
+                SqlDataReader Data = cmd.ExecuteReader();
+
+                if (Data.Read())
+                {
+
+                    Usuario usuario = this.usuarioModel.materializar((int)Data["idUsuario"]);
+                    DateTime fechaHoraInicio = (DateTime)Data["fechaHoraInicio"];
+                    DateTime fechaHoraFin = (DateTime)Data["fechaHoraFin"];
+
+                    session.Usuario = usuario;
+                    session.fechaHoraInicio = fechaHoraInicio;
+                    session.fechaHoraFin = fechaHoraFin;
+
+          
+                }
+
+                con.Close();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return session;
+        }
+
     }
 }

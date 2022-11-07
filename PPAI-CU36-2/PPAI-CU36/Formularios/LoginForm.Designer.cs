@@ -36,8 +36,8 @@ namespace PPAI_CU36
             this.titleBar = new System.Windows.Forms.Panel();
             this.btnMinimize = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.PictureBox();
-            this.txtPass = new System.Windows.Forms.TextBox();
             this.Icono = new System.Windows.Forms.PictureBox();
+            this.txtPass = new System.Windows.Forms.TextBox();
             this.titleBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnClose)).BeginInit();
@@ -129,18 +129,6 @@ namespace PPAI_CU36
             this.btnClose.TabStop = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // txtPass
-            // 
-            this.txtPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(96)))), ((int)(((byte)(130)))));
-            this.txtPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtPass.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPass.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.txtPass.Location = new System.Drawing.Point(25, 312);
-            this.txtPass.Name = "txtPass";
-            this.txtPass.PasswordChar = '*';
-            this.txtPass.Size = new System.Drawing.Size(350, 22);
-            this.txtPass.TabIndex = 14;
-            // 
             // Icono
             // 
             this.Icono.Image = global::PPAI_CU36.Properties.Resources.logoutnfede;
@@ -151,17 +139,29 @@ namespace PPAI_CU36
             this.Icono.TabIndex = 13;
             this.Icono.TabStop = false;
             // 
+            // txtPass
+            // 
+            this.txtPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(96)))), ((int)(((byte)(130)))));
+            this.txtPass.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPass.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPass.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtPass.Location = new System.Drawing.Point(25, 314);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
+            this.txtPass.Size = new System.Drawing.Size(350, 22);
+            this.txtPass.TabIndex = 7;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
             this.ClientSize = new System.Drawing.Size(400, 535);
-            this.Controls.Add(this.txtPass);
             this.Controls.Add(this.Icono);
             this.Controls.Add(this.titleBar);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.Label2);
+            this.Controls.Add(this.txtPass);
             this.Controls.Add(this.txtUser);
             this.Controls.Add(this.Label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

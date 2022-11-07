@@ -18,16 +18,18 @@ namespace PPAI_CU36.Datos.Models
         public void desmaterializar(CambioEstadoRT cambio, int IdRT)
         {
 
-            string consulta = "INSERT INTO " + this.Tabla + " VALUES ('" + cambio.fechaHoraDesde + ", "
-                                                                         + cambio.fechaHoraHasta + ", "
-                                + "(SELECT id FROM Estado WHERE nombre LIKE" +  cambio.Estado.nombre + ")" + ", "
-                                + IdRT + "')";
+            string consulta = "INSERT INTO " + this.Tabla + " (fechaHoraDesde,idEstado,idRecursoTecnologico) VALUES ( CAST(@FHD AS DATETIME), "
+                                                          + "(SELECT id FROM Estado WHERE nombre LIKE '"+  cambio.Estado.nombre + "')," +IdRT+ ")";
 
             try
             {
                 SqlConnection con = new SqlConnection(this.BDString);
                 con.Open();
                 SqlCommand cmd = new SqlCommand(consulta, con);
+                cmd.Parameters.Clear();
+
+                cmd.Parameters.AddWithValue("@FHD",cambio.fechaHoraDesde);
+            
                 cmd.ExecuteNonQuery();
                 con.Close();
                 cmd.Parameters.Clear();
@@ -40,7 +42,7 @@ namespace PPAI_CU36.Datos.Models
 
         public List<CambioEstadoRT> materializar(int idRT)
         {
-            string consulta = "SELECT FROM " + this.Tabla + " WHERE idRecursoTecnologico LIKE" + idRT;
+            string consulta = "SELECT * FROM " + this.Tabla + " WHERE idRecursoTecnologico LIKE " + idRT;
             List<CambioEstadoRT> rta = new List<CambioEstadoRT>();
 
             try
@@ -54,13 +56,25 @@ namespace PPAI_CU36.Datos.Models
 
                 while (Data.Read())
                 {
-                    rta.Add(new CambioEstadoRT { 
-                    
-                    fechaHoraDesde = (DateTime) Data["fechaHoraDesde"],
-                    fechaHoraHasta = (DateTime) Data["fechaHoraHasta"],
-                    Estado = estadoModel.materializar((int) Data["idEctado"])
-                    
-                    });
+                   DateTime fechaHoraDesde = (DateTime)Data["fechaHoraDesde"];
+                   Estado estado = estadoModel.materializar((int)Data["idEstado"]);
+                    CambioEstadoRT CERT = new CambioEstadoRT();
+
+
+                    if (Data["fechaHoraHasta"] is DBNull)
+                    {
+                        CERT.fechaHoraDesde = fechaHoraDesde;
+                        CERT.Estado = estado;
+                    }
+                    else
+                    {
+                        CERT.fechaHoraDesde = fechaHoraDesde;
+                        CERT.Estado = estado;
+                        CERT.fechaHoraHasta = (DateTime)Data["fechaHoraHasta"];
+                    }
+
+
+                    rta.Add(CERT);
                 }
 
                 con.Close();

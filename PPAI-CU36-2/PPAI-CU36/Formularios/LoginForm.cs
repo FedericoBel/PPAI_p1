@@ -1,4 +1,5 @@
 ﻿using PPAI_CU36.Datos;
+using PPAI_CU36.Datos.Models;
 using PPAI_CU36.Entidades;
 using PPAI_CU36.Formularios;
 using System;
@@ -23,6 +24,7 @@ namespace PPAI_CU36
         static public String contraseña;
 
 
+        private UsuarioModel usuarios = new UsuarioModel();
         public LoginForm()
         {
             InitializeComponent();
@@ -32,14 +34,16 @@ namespace PPAI_CU36
         {
 
             bool esUsuario = false;
-            List<Usuario> listaUsuarios = BD.ListaUsuarios();
+            List<Usuario> listaUsuarios = usuarios.ObtenerUsuarios();
 
+            int userlog = 0;
 
             for (int i = 0; i < listaUsuarios.Count; i++)
             {
                 if (txtUser.Text.Equals(listaUsuarios[i].nombreUsuario) && txtPass.Text.Equals(listaUsuarios[i].claveDeUsuario))
                 {
                     esUsuario = true;
+                    userlog = i;
                 }
             }
 
@@ -50,7 +54,7 @@ namespace PPAI_CU36
                 contraseña = txtPass.Text;
 
 
-                Principal ventana = new Principal();
+                Principal ventana = new Principal { usuariologeado = listaUsuarios[userlog]};
                 ventanaPrincipal = ventana;
                 ventana.Show();
                 this.Hide();

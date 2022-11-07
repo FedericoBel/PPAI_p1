@@ -65,12 +65,16 @@
     <Compile Include="Datos\DAO\UsuarioDAO.cs" />
     <Compile Include="Datos\DBHelper.cs" />
     <Compile Include="Datos\Iterador.cs" />
+    <Compile Include="Datos\Models\AsignacionCientificoDelCIModel.cs" />
+    <Compile Include="Datos\Models\AsignacionResponsableTecnicoModel.cs" />
     <Compile Include="Datos\Models\CambioEstadoRTModel.cs" />
+    <Compile Include="Datos\Models\CambioEstadoTurnoModel.cs" />
     <Compile Include="Datos\Models\EstadoModel.cs" />
     <Compile Include="Datos\Models\MantenimientoModel.cs" />
     <Compile Include="Datos\Models\MarcaModel.cs" />
     <Compile Include="Datos\Models\ModeloModel.cs" />
     <Compile Include="Datos\Models\SesionModel.cs" />
+    <Compile Include="Datos\Models\TurnoModel.cs" />
     <Compile Include="Datos\Models\UsuarioModel.cs" />
     <Compile Include="Datos\Models\PersonalCientificoModel.cs" />
     <Compile Include="Datos\Models\RecursoTecnologicoModel.cs" />

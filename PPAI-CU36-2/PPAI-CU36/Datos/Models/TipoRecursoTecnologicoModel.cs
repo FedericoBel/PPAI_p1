@@ -17,7 +17,7 @@ namespace PPAI_CU36.Datos.Models
         public void desmaterializar(TipoRecursoTecnologico tipoRT)
         {
 
-            string consulta = "INSERT INTO " + this.Tabla + " VALUES (" + tipoRT.nombre + ", " + tipoRT.descripcion +")";
+            string consulta = "INSERT INTO " + this.Tabla + " VALUES ('" + tipoRT.nombre + "', '" + tipoRT.descripcion +"')";
 
             try
             {
@@ -36,7 +36,7 @@ namespace PPAI_CU36.Datos.Models
 
         public TipoRecursoTecnologico materializar(int idTipoRT)
         {
-            string consulta = "SELECT FROM " + this.Tabla + " WHERE id LIKE" + idTipoRT;
+            string consulta = "SELECT * FROM " + this.Tabla + " WHERE id LIKE " + idTipoRT;
             TipoRecursoTecnologico rta = new TipoRecursoTecnologico();
 
             try
