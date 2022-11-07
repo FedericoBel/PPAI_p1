@@ -66,7 +66,7 @@ namespace PPAI_CU36.Formularios
           {
             CasoDeUso caso = new CasoDeUso ();
             casoDeUso = caso;
-            caso.Show();
+            caso.ShowDialog();
 
         }
 

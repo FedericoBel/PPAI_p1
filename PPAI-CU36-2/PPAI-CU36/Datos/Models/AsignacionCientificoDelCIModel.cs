@@ -85,7 +85,7 @@ namespace PPAI_CU36.Datos.Models
         }
         public List<AsignacionCientificoDelCI> ObtenerAsignacionesCientificoDelCI()
         {
-            string consulta = "SELECT FROM " + this.Tabla ;
+            string consulta = "SELECT * FROM " + this.Tabla ;
             List<AsignacionCientificoDelCI> rta = new List<AsignacionCientificoDelCI>();
 
             try

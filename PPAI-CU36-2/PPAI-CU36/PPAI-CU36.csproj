@@ -49,20 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\BD.cs" />
-    <Compile Include="Datos\DAO\AsignacionCientificoDelCIDAO.cs" />
-    <Compile Include="Datos\DAO\AsignacionResponsableTecnicoRTDAO.cs" />
-    <Compile Include="Datos\DAO\CambioEstadoRTDAO.cs" />
-    <Compile Include="Datos\DAO\CambioEstadoTurnoDAO.cs" />
-    <Compile Include="Datos\DAO\EstadoDAO.cs" />
-    <Compile Include="Datos\DAO\MantenimientoDAO.cs" />
-    <Compile Include="Datos\DAO\MarcaDAO.cs" />
-    <Compile Include="Datos\DAO\ModeloDAO.cs" />
-    <Compile Include="Datos\DAO\PersonalCientificoDAO.cs" />
-    <Compile Include="Datos\DAO\RecursosTecnologicosDAO.cs" />
-    <Compile Include="Datos\DAO\SesionDAO.cs" />
-    <Compile Include="Datos\DAO\TipoRecursoTecnologicoDAO.cs" />
-    <Compile Include="Datos\DAO\TurnoDAO.cs" />
-    <Compile Include="Datos\DAO\UsuarioDAO.cs" />
     <Compile Include="Datos\DBHelper.cs" />
     <Compile Include="Datos\Iterador.cs" />
     <Compile Include="Datos\Models\AsignacionCientificoDelCIModel.cs" />

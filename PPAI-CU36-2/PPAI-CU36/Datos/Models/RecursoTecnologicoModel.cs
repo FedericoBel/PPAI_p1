@@ -111,5 +111,75 @@ namespace PPAI_CU36.Datos.Models
 
             return rta;
         }
+
+
+
+
+        public List<RecursosTecnologicos> ObtenerListaRecursosTecnologicosMaterializar(int idAsignacionRT)
+        {
+            string consulta = "SELECT rt.* FROM RecursoTecnologico rt JOIN AsignacionResponsableTecnicoRT art on (rt.numero = art.IdRecursoTecnologico) " +
+                "WHERE art.id = @idasigrt";
+            List<RecursosTecnologicos> listaRecursos = new List<RecursosTecnologicos>();
+            SqlConnection con = new SqlConnection(this.BDString);
+
+            try
+            {
+
+                con.Open();
+                SqlCommand cmd = new SqlCommand(consulta, con);
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@idasigrt", idAsignacionRT);
+
+
+                cmd.ExecuteNonQuery();
+                
+                SqlDataReader Data = cmd.ExecuteReader();
+
+                while (Data.Read())
+                {
+                    int Numero = (int)Data["numero"];
+                    int Duracion = (int)Data["duracionMantenimientoPrev"];
+                    DateTime FechaAlta = Convert.ToDateTime(Data["fechaAlta"]);
+                    int FraccionHS = (int)Data["fraccionHorariosTurnos"];
+                    int TipoRT = (int)Data["idTipoRT"];
+                    int modelo = (int)Data["modelo"];
+                    int img = (int)Data["imagenes"];
+                    int periodicidad = (int)Data["periodicidadMantenimientoPrev"];
+
+                    RecursosTecnologicos rta = new RecursosTecnologicos();
+
+                    rta.numeroRT = Numero;
+                    rta.duracionMantenimientoPrev = Duracion;
+                    rta.fechaAlta = FechaAlta;
+                    rta.fraccionHorarioTurnos = FraccionHS;
+                    rta.TipoRecursoTecnologico = this.TipoRTModel.materializar(TipoRT);
+                    rta.Modelo = this.modelosModel.materializar(modelo);
+                    rta.imagenes = img;
+                    rta.perioricidadMantenimientoPrev = periodicidad;
+                    rta.mantenimientos = this.MantenimientoModel.materializar(Numero);
+                    rta.cambioEstadoRt = this.cambioRTModel.materializar(Numero);
+                    rta.turnos = this.turnoModel.materializar(Numero, "IdRecursoTecnologico");
+
+
+                    listaRecursos.Add(rta);
+
+
+
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                con.Close();
+
+            }
+            return listaRecursos;
+        }
     }
 }

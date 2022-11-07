@@ -1,6 +1,7 @@
 ﻿using PPAI_CU36.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -124,85 +125,55 @@ namespace PPAI_CU36.Datos.Models
 
         public List<AsignacionResponsableTecnicoRT> ObtenerAsignacionesResponsableTecnicoRT()
         {
-            string consulta = "SELECT * FROM " + this.Tabla ;
+            string consulta = "SELECT art.id, art.FechaHoraDesde, art.FechaHoraHasta, art.IdPersonalCientifico " +
+                "FROM AsignacionResponsableTecnicoRT art " +
+                "GROUP BY art.id, art.FechaHoraDesde, art.FechaHoraHasta, art.IdPersonalCientifico"  ;
+    
+            SqlConnection con = new SqlConnection(this.BDString);
+
             List<AsignacionResponsableTecnicoRT> rta = new List<AsignacionResponsableTecnicoRT>();
+
 
             try
             {
-                SqlConnection con = new SqlConnection(this.BDString);
                 con.Open();
                 SqlCommand cmd = new SqlCommand(consulta, con);
                 cmd.ExecuteNonQuery();
 
-                SqlDataReader Data = cmd.ExecuteReader();
-
-                int indice = 1;
-                Dictionary<int,List<RecursosTecnologicos>> rts = new Dictionary<int,List<RecursosTecnologicos>>();
-                while (Data.Read()) {
-                    /*                    AsignacionResponsableTecnicoRT ART = new AsignacionResponsableTecnicoRT();
-                                        List<List<RecursosTecnologicos>> rts = new List<List<RecursosTecnologicos>>();
-                                        if ((int)Data["id"] == indice)
-                                        {
-                                            rts[indice - 1].Add(this.RTM.materializar((int)Data["IdRecursoTecnologico"]));
-
-                                        }
-                                        else
-                                        {
-                                            rta.Add(ART);
-                                            if (Data["FechaHoraHasta"] is DBNull)
-                                            {
-
-                                                rta[indice - 1].fechaDesde = (DateTime)Data["FechaHoraDesde"];
-                                                rta[indice - 1].personalCientifico = this.PCM.materializar((int)Data["IdPersonalCientifico"]);
-                                                rta[indice - 1].recursosTecnologicos = rts[indice - 1];
+                SqlDataReader dr = cmd.ExecuteReader();
 
 
-                                            }
-                                            else
-                                            {
-                                                rta[indice - 1].fechaDesde = (DateTime)Data["FechaHoraDesde"];
-                                                rta[indice - 1].fechaHasta = (DateTime)Data["FechaHoraHasta"];
-                                                rta[indice - 1].personalCientifico = this.PCM.materializar((int)Data["IdPersonalCientifico"]);
-                                                rta[indice - 1].recursosTecnologicos = rts[indice - 1];
-                                            }
-                                            indice++;
-                    }
-                    */
+                while (dr != null && dr.Read())
+                {
+                    AsignacionResponsableTecnicoRT asignacion = new AsignacionResponsableTecnicoRT();
 
-                    RecursosTecnologicos RT = this.RTM.materializar((int)Data["IdRecursoTecnologico"]);
-                    List<RecursosTecnologicos> LRT = new List<RecursosTecnologicos> ();
-                    LRT.Add(RT);
-                    rts.Add((int)Data["id"],LRT);
-
-
-                    if ((int)Data["id"] != indice)
+                    if (dr["FechaHoraHasta"] is DBNull)
                     {
-                        AsignacionResponsableTecnicoRT ARTRT = new AsignacionResponsableTecnicoRT();
-                        if (Data["FechaHoraHasta"] is DBNull)
-                        {
-
-                            ARTRT.fechaDesde = (DateTime)Data["FechaHoraDesde"];
-                            ARTRT.personalCientifico = this.PCM.materializar((int)Data["IdPersonalCientifico"]);
-                            ARTRT.recursosTecnologicos = rts[(int)Data["id"]];
-
-
-                        }
-                        else
-                        {
-                            ARTRT.fechaDesde = (DateTime)Data["FechaHoraDesde"];
-                            ARTRT.fechaHasta = (DateTime)Data["FechaHoraHasta"];
-                            ARTRT.personalCientifico = this.PCM.materializar((int)Data["IdPersonalCientifico"]);
-                            ARTRT.recursosTecnologicos = rts[(int)Data["id"] - 1];
-                        }
-                        rta.Add(ARTRT);
+                        asignacion.fechaDesde = (DateTime)(dr["FechaHoraDesde"]);
                     }
- 
+                    else
+                    {
+                        asignacion.fechaDesde = (DateTime)(dr["FechaHoraDesde"]);
+                        asignacion.fechaHasta = (DateTime)(dr["FechaHoraHasta"]);
+                    }
+
+
+                    asignacion.recursosTecnologicos = (this.RTM.ObtenerListaRecursosTecnologicosMaterializar((int)dr["id"]));
+                    asignacion.personalCientifico= (this.PCM.materializar((int)dr["IdPersonalCientifico"]));
+
+
+                    rta.Add(asignacion);
+
                 }
-                con.Close();
+
             }
             catch (Exception e)
             {
                 throw e;
+            }
+            finally
+            {
+                con.Close();
             }
 
             return rta;

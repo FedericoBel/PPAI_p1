@@ -82,10 +82,10 @@ namespace PPAI_CU36.Datos.Models
         {
             string consulta = "SELECT * FROM " + this.Tabla ;
             List<Estado> estados = new List<Estado>();
-
+            SqlConnection con = new SqlConnection(this.BDString);
             try
             {
-                SqlConnection con = new SqlConnection(this.BDString);
+                
                 con.Open();
                 SqlCommand cmd = new SqlCommand(consulta, con);
                 cmd.ExecuteNonQuery();
@@ -111,14 +111,17 @@ namespace PPAI_CU36.Datos.Models
 
                     estados.Add(est);
                 }
+                
 
-                con.Close();
             }
             catch (Exception e)
             {
                 throw e;
             }
-
+            finally
+            {
+                con.Close();
+            }
             return estados;
         }
 
