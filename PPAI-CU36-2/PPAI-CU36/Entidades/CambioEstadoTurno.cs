@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PPAI_CU36.Datos.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace PPAI_CU36.Entidades
 {
     public class CambioEstadoTurno
     {
+        public int id { get; set; }
         public DateTime fechaHoraDesde { get; set; }
         public DateTime fechaHoraHasta { get; set; }
         public Estado estado { get; set; }
@@ -32,6 +34,8 @@ namespace PPAI_CU36.Entidades
 
         internal void setFechaFin()
         {
+            CambioEstadoTurnoModel cambioturnomodelo = new CambioEstadoTurnoModel();
+            cambioturnomodelo.UpdateUltimoCambioEstado(this);
             this.fechaHoraHasta = DateTime.Now;
         }
     }

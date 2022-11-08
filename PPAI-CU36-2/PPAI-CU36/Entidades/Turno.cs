@@ -1,4 +1,5 @@
-﻿using PPAI_CU36.Formularios;
+﻿using PPAI_CU36.Datos.Models;
+using PPAI_CU36.Formularios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,16 +84,39 @@ namespace PPAI_CU36.Entidades
                     this.CambioEstadoTurno[i].setFechaFin();
                 }
             }
+            CambioEstadoTurnoModel cambioestadomodelo = new CambioEstadoTurnoModel();
 
             var nuevoCambioEstado = new CambioEstadoTurno
             {
+                id = cambioestadomodelo.ObtenerUltimoId() + 1,
                 fechaHoraDesde = DateTime.Now,
                 fechaHoraHasta = Convert.ToDateTime(null),
                 estado = canceladoMC,
             };
 
+
+            cambioestadomodelo.desmaterializar(nuevoCambioEstado, this.numero);
             CambioEstadoTurno.Add(nuevoCambioEstado);
 
+        }
+
+
+        private int buscarMaximoId()
+        {
+            int mayorId = -1;
+
+            List<int> listaid = new List<int>();
+
+
+
+            foreach (var item in this.CambioEstadoTurno)
+            {
+                listaid.Add(item.id);
+
+            }
+
+            mayorId = listaid.Max();
+            return mayorId;
         }
     }
 

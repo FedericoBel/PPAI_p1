@@ -1,4 +1,5 @@
 ﻿using PPAI_CU36.Datos;
+using PPAI_CU36.Datos.Models;
 using PPAI_CU36.Formularios;
 using System;
 using System.Collections.Generic;
@@ -98,6 +99,11 @@ namespace PPAI_CU36.Entidades
                 ExtensionMantenimiento = extension,
 
             };
+
+            MantenimientoModel mantenimientoModelo = new MantenimientoModel();
+
+            mantenimientoModelo.desmaterializar(nuevoManteniento, this.numeroRT);
+
             this.mantenimientos.Add(nuevoManteniento);
         }
 
@@ -112,16 +118,41 @@ namespace PPAI_CU36.Entidades
                 }
 
             }
+            CambioEstadoRTModel cambioestadomodelo = new CambioEstadoRTModel();
 
-            var nuevo_CambioEstado = new CambioEstadoRT
-            {
-                fechaHoraDesde = DateTime.Now,  
-                fechaHoraHasta = Convert.ToDateTime(null),
-                Estado = ingresoMC,
-            };
+            CambioEstadoRT nuevo_CambioEstado = new CambioEstadoRT();
+
+            nuevo_CambioEstado.id = cambioestadomodelo.ObtenerUltimoId() + 1;
+
+            nuevo_CambioEstado.fechaHoraDesde = DateTime.Now;
+            nuevo_CambioEstado.fechaHoraHasta = Convert.ToDateTime(null);
+            nuevo_CambioEstado.Estado = ingresoMC;
+            
+
+            MessageBox.Show(this.cambioEstadoRt.Count.ToString());
+           
+            cambioestadomodelo.desmaterializar(nuevo_CambioEstado, this.numeroRT); 
 
             this.cambioEstadoRt.Add(nuevo_CambioEstado);
 
+        }
+
+        private int buscarMaximoId()
+        {
+            int mayorId = -1;
+
+            List<int> listaid = new List<int>();
+           
+
+
+            foreach (var item in this.cambioEstadoRt)
+            {
+                listaid.Add(item.id);
+
+            }
+
+            mayorId = listaid.Max();
+            return mayorId;
         }
 
         // cancelar turno

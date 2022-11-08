@@ -283,7 +283,7 @@ namespace PPAI_CU36.Entidades
                             h1{color:dodgerblue;}
                             h2{color:darkorange;}
                             </style>
-                            <h1>Su turno para " + this.recursosTecnologicosDisponibles[indiceRTS].TipoRecursoTecnologico.nombre.ToString() + " en fecha: " + filaGrillaTurno[i][j].Cells[2].Value.ToString() + " fue cancelado por motivos de mantenimiento</h1></br>" +
+                            <h1>Su turno para " + this.recursosTecnologicosDisponibles[indiceRTS].TipoRecursoTecnologico.nombre.ToString() + " en fecha: " + filaGrillaTurno[i][j].Cells[2].Value.ToString() + " fue cancelado y puesto en mantenimiento correctivo por motivos de: " + this.motivo + "</h1></br>" +
                         "<h2>Disculpe las molestias, muchas gracias!</h2>";
 
                     this.observadores[0].enviarNotificacion(this.filaGrillaTurno[i][j].Cells[1].Value.ToString(), "Cancelación turno recurso tecnologico", body);

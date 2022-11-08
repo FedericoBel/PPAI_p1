@@ -17,7 +17,7 @@ namespace PPAI_CU36.Datos.Models
         public void desmaterializar(Mantenimiento mantenimiento, int idRT)
         {
 
-            string consulta = "INSERT INTO " + this.Tabla + " VALUES ( @FI,@FF,@FIP"
+            string consulta = "INSERT INTO " + this.Tabla + " VALUES ( @FI,@FF,@FIP, '"
                                                                         + mantenimiento.motivoMantenimiento + "', "
                                                                         +  idRT + ")";
             try

@@ -105,7 +105,45 @@ namespace PPAI_CU36.Datos
             }
         }
 
-        
+        public void iteradorCambioEstado()
+        {
+            CambioEstadoRTModel usM = new CambioEstadoRTModel();
+            List<CambioEstadoRT> lista = new List<CambioEstadoRT> 
+            {
+
+            new CambioEstadoRT
+            {
+                Estado = BD.ListaEstados()[4],
+                fechaHoraDesde = Convert.ToDateTime("06/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime("07/06/2022"),
+
+            }, new CambioEstadoRT
+            {
+                Estado = BD.ListaEstados()[4],
+                fechaHoraDesde = Convert.ToDateTime("06/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime(null),
+
+            }, new CambioEstadoRT
+            {
+                Estado = BD.ListaEstados()[4],
+                fechaHoraDesde = Convert.ToDateTime("06/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime("07/06/2022"),
+
+            }, new CambioEstadoRT
+            {
+                Estado = BD.ListaEstados()[4],
+                fechaHoraDesde = Convert.ToDateTime("06/06/2022"),
+                fechaHoraHasta = Convert.ToDateTime(null),
+
+            }
+        };
+            
+            for (int i = 2 ; i < 4; i++)
+            {
+                usM.desmaterializar(lista[i], 2);
+            }
+        }
+
 
         public void iteradorAsignacionRT()
         {
